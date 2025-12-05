@@ -47,17 +47,17 @@
           <h1>Should you stay with your current supplier, diversify, or nearshore?</h1>
           <p class="hero-sub">
             SourcingLens gives you a directional landed-cost view across China, Vietnam, Mexico, India, and the US.
-            We use GPT‑4.1‑mini to infer HS codes and estimate tariffs, freight and annual spend – so you can quickly
+            We use GPT-4.1-mini to infer HS codes and estimate tariffs, freight and annual spend – so you can quickly
             see which lanes look promising before you call a broker.
           </p>
           <ul class="hero-bullets">
             <li>LLM-based HS-code suggestions (with clear disclaimers)</li>
             <li>Directional landed-cost comparison across 5 countries</li>
-            <li>CSV download to share with finance & ops</li>
+            <li>CSV download to share with finance &amp; ops</li>
           </ul>
           <div class="hero-cta-row">
             <a href="#analysis-card" class="btn btn-primary">Run a free directional analysis</a>
-            <a href="#pricing" class="btn btn-ghost">View pricing & Stripe checkout</a>
+            <a href="#pricing" class="btn btn-ghost">View pricing &amp; Stripe checkout</a>
           </div>
           <p class="tiny-note">No login required. Free analysis runs entirely in your browser.</p>
         </div>
@@ -67,7 +67,7 @@
             <h2>Quick Sourcing Analysis</h2>
             <p class="card-sub">A simple, directional check before you invest time in RFQs.</p>
           </div>
-          <form id="analysis-form" novalidate>
+          <form id="analysis-form" novalidate onsubmit="return false;">
             <label>
               Product name
               <input type="text" id="productName" placeholder="e.g., 750ml insulated water bottle" required />
@@ -82,7 +82,7 @@
             <label>
               HS code (optional)
               <input type="text" id="hsCode" placeholder="e.g., 732393" />
-              <span class="hint">If empty, SourcingLens will call GPT‑4.1‑mini to suggest a likely HS6 family.</span>
+              <span class="hint">If empty, SourcingLens will call GPT-4.1-mini to suggest a likely HS6 family.</span>
             </label>
 
             <div class="grid-2">
@@ -114,7 +114,7 @@
                 Priority
                 <select id="priority">
                   <option value="cost">Lowest cost</option>
-                  <option value="balance">Balance cost & risk</option>
+                  <option value="balance">Balance cost &amp; risk</option>
                   <option value="nearshore">Nearshoring / USMCA</option>
                   <option value="us">US / local preference</option>
                 </select>
@@ -126,7 +126,7 @@
               <span id="analysisStatus" class="status-pill status-idle">Ready to run</span>
             </div>
 
-            <button type="submit" id="runButton" class="btn btn-primary btn-full">
+            <button type="button" id="runButton" class="btn btn-primary btn-full">
               Run free analysis
             </button>
             <p class="disclaimer">
@@ -200,7 +200,7 @@
             </div>
 
             <div class="card subtle">
-              <h3>Compliance & risk notes</h3>
+              <h3>Compliance &amp; risk notes</h3>
               <p id="compliance-notes" class="side-text"></p>
             </div>
 
@@ -225,7 +225,7 @@
             <h3>1. Normalize your current lane</h3>
             <p>
               Your current supplier country and unit cost act as the anchor. If you don’t provide an HS code,
-              we call GPT‑4.1‑mini with your product description to infer a likely HS6 family.
+              we call GPT-4.1-mini with your product description to infer a likely HS6 family.
             </p>
           </div>
           <div class="how-step card">
@@ -236,7 +236,7 @@
             </p>
           </div>
           <div class="how-step card">
-            <h3>3. Compare & export</h3>
+            <h3>3. Compare &amp; export</h3>
             <p>
               We rank countries by directional landed cost, highlight potential savings,
               and let you download the full table as CSV to share with your team.
@@ -268,7 +268,7 @@
               <li>CSV export enabled</li>
               <li>Optional GPT-based HS suggestion</li>
             </ul>
-            <button class="btn btn-ghost btn-full" type="button" onclick="document.getElementById('analysis-card').scrollIntoView({behavior:'smooth'});">
+            <button class="btn btn-ghost btn-full" type="button" onclick="document.getElementById('analysis-card').scrollIntoView({ behavior: 'smooth' });">
               Run free analysis
             </button>
           </article>
@@ -282,7 +282,7 @@
               <li>Full landed-cost report for one SKU</li>
               <li>All 5 countries included</li>
               <li>CSV + narrative summary</li>
-              <li>Ideal for Amazon sellers & smaller brands</li>
+              <li>Ideal for Amazon sellers &amp; smaller brands</li>
             </ul>
             <a class="btn btn-primary btn-full" href="https://buy.stripe.com/7sYaEXe2G4bM0PT6Mk3sI07" target="_blank" rel="noopener noreferrer">
               Buy Starter Report
@@ -296,7 +296,7 @@
             <ul class="price-list">
               <li>Everything in Starter</li>
               <li>Expanded lane commentary</li>
-              <li>Suggested next steps & scenarios</li>
+              <li>Suggested next steps &amp; scenarios</li>
               <li>Great for sourcing / ops managers</li>
             </ul>
             <a class="btn btn-outline btn-full" href="https://buy.stripe.com/3cI8wPcYC37I8ilc6E3sI08" target="_blank" rel="noopener noreferrer">
@@ -312,7 +312,7 @@
               <li>Up to 10 analyses per month</li>
               <li>All countries + CSV exports</li>
               <li>Priority email responses</li>
-              <li>Best for DTC & marketplace brands</li>
+              <li>Best for DTC &amp; marketplace brands</li>
             </ul>
             <a class="btn btn-outline btn-full" href="https://buy.stripe.com/6oUdR93o26jU5694Ec3sI09" target="_blank" rel="noopener noreferrer">
               Choose Pro Monthly
@@ -360,7 +360,7 @@
           </div>
           <div class="faq-item card">
             <h3>How accurate are HS suggestions?</h3>
-            <p>GPT‑4.1‑mini is very strong at pattern recognition, but HS classification is nuanced. Always confirm with your broker. Treat HS suggestions here as a starting point, not a final answer.</p>
+            <p>GPT-4.1-mini is very strong at pattern recognition, but HS classification is nuanced. Always confirm with your broker. Treat HS suggestions here as a starting point, not a final answer.</p>
           </div>
           <div class="faq-item card">
             <h3>Will you store my product details?</h3>
