@@ -1,5 +1,5 @@
 
-// Core UX + analysis logic for SourcingLens
+// SourcingLens client logic – shared between main site and results page
 
 document.addEventListener("DOMContentLoaded", () => {
   const yearSpan = document.getElementById("year");
@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const starterRunButton = document.getElementById("starterRunButton");
   if (starterRunButton) starterRunButton.addEventListener("click", runStarterAnalysis);
   const starterDownloadCsvButton = document.getElementById("starterDownloadCsvButton");
-  if (starterDownloadCsvButton) starterDownloadCsvButton.addEventListener("click", () => downloadCsv(starterLastRun?.rows || [], "sourcinglens_starter.csv"));
+  if (starterDownloadCsvButton) starterDownloadCsvButton.addEventListener("click", () => {
+    if (starterLastRun?.rows?.length) downloadCsv(starterLastRun.rows, "sourcinglens_starter.csv");
+  });
 
   // Pro
   const proAddSkuButton = document.getElementById("proAddSkuButton");
@@ -33,33 +35,56 @@ document.addEventListener("DOMContentLoaded", () => {
   const proRunButton = document.getElementById("proRunButton");
   if (proRunButton) proRunButton.addEventListener("click", runProAnalysis);
   const proDownloadCsvButton = document.getElementById("proDownloadCsvButton");
-  if (proDownloadCsvButton) proDownloadCsvButton.addEventListener("click", () => downloadCsv(proLastRun?.rows || [], "sourcinglens_pro_portfolio.csv"));
+  if (proDownloadCsvButton) proDownloadCsvButton.addEventListener("click", () => {
+    if (proLastRun?.rows?.length) downloadCsv(proLastRun.rows, "sourcinglens_pro_portfolio.csv");
+  });
   const proDownloadPdfButton = document.getElementById("proDownloadPdfButton");
   if (proDownloadPdfButton) proDownloadPdfButton.addEventListener("click", downloadProPdf);
 
-  // Pro save to dashboard triggers Supabase handler if available
   const proSaveButton = document.getElementById("proSaveToDashboardButton");
   if (proSaveButton) proSaveButton.addEventListener("click", () => {
     if (window.saveProRunToSupabase) {
       window.saveProRunToSupabase(proLastRun);
     } else {
       const el = document.getElementById("dashboardSaveStatus");
-      if (el) {
-        el.textContent = "Dashboard not ready yet. Check Supabase config.";
-      }
+      if (el) el.textContent = "Dashboard not ready – check Supabase config.";
     }
   });
 
-  // Init pro sku container
-  addProSkuRow();
+  // Init pro SKU container
+  if (document.getElementById("pro-sku-container")) addProSkuRow();
+
+  // Handle Stripe success redirect query (?plan=starter|pro) on results page
+  const params = new URLSearchParams(window.location.search);
+  const plan = params.get("plan");
+  const banner = document.getElementById("purchaseBanner");
+  const bannerText = document.getElementById("purchaseBannerText");
+  if (banner && plan) {
+    if (plan === "starter") {
+      bannerText && (bannerText.textContent = "Thank you for purchasing the Starter analysis. Use the workspace below to generate your 1-SKU report.");
+    } else if (plan === "pro") {
+      bannerText && (bannerText.textContent = "Thank you for purchasing the Pro pack. Use the Pro tab below for a multi-SKU portfolio run.");
+      const proTabButton = document.querySelector('.tab-button[data-tab="pro-tab"]');
+      const starterTabButton = document.querySelector('.tab-button[data-tab="starter-tab"]');
+      const proPanel = document.getElementById("pro-tab");
+      const starterPanel = document.getElementById("starter-tab");
+      if (proTabButton && proPanel) {
+        document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+        proTabButton.classList.add("active");
+        proPanel.classList.add("active");
+        if (starterTabButton) starterTabButton.classList.remove("active");
+        if (starterPanel) starterPanel.classList.remove("active");
+      }
+    }
+  }
 });
 
-// Simple in-memory state
+// In-memory state
 let starterLastRun = null;
 let proLastRun = null;
 
-/* Utility: country assumptions */
-
+// Country heuristics
 const COUNTRY_CONFIG = {
   china:   { label: "China",   baseFactor: 1.00, tariff: 0.08, ship: 0.70 },
   vietnam: { label: "Vietnam", baseFactor: 0.98, tariff: 0.05, ship: 0.75 },
@@ -68,7 +93,7 @@ const COUNTRY_CONFIG = {
   usa:     { label: "USA",     baseFactor: 1.18, tariff: 0.00, ship: 0.30 }
 };
 
-const COUNTRY_KEYS = ["china","vietnam","mexico","india","usa"];
+const COUNTRY_KEYS = ["china", "vietnam", "mexico", "india", "usa"];
 
 function computeLandedForCountry(currentUnitCost, annualVolume, countryKey) {
   const cfg = COUNTRY_CONFIG[countryKey];
@@ -78,15 +103,7 @@ function computeLandedForCountry(currentUnitCost, annualVolume, countryKey) {
   const shipCost = base * 0.1 * cfg.ship;
   const totalUnit = base + tariffCost + shipCost;
   const annualCost = totalUnit * annualVolume;
-  return {
-    key: countryKey,
-    label: cfg.label,
-    base: base,
-    tariff: tariffCost,
-    shipping: shipCost,
-    totalUnit,
-    annualCost
-  };
+  return { key: countryKey, label: cfg.label, base, tariff: tariffCost, shipping: shipCost, totalUnit, annualCost };
 }
 
 function formatCurrency(num) {
@@ -99,8 +116,7 @@ function percentDelta(newVal, baseVal) {
   return ((newVal - baseVal) / baseVal) * 100;
 }
 
-/* Free comparison */
-
+/* Free comparison (index.html only) */
 function runFreeComparison() {
   const productName = document.getElementById("freeProductName")?.value.trim();
   const currentCountry = document.getElementById("freeCurrentCountry")?.value;
@@ -176,8 +192,7 @@ function runFreeComparison() {
   }
 }
 
-/* Starter analysis (1 SKU, 5 countries, HS LLM) */
-
+/* Starter: 1 SKU, HS via LLM, 5-country comparison */
 async function runStarterAnalysis() {
   const productName = document.getElementById("starterProductName")?.value.trim();
   const desc = document.getElementById("starterProductDescription")?.value.trim();
@@ -209,11 +224,12 @@ async function runStarterAnalysis() {
       hsStatus.textContent = "HS code: using your input.";
       hsStatus.className = "status-pill status-ok";
     }
-  } else {
-    if (hsStatus) {
-      hsStatus.textContent = "HS code: asking GPT-4.1-mini…";
-      hsStatus.className = "status-pill status-busy";
-    }
+  } else if (hsStatus) {
+    hsStatus.textContent = "HS code: asking GPT-4.1-mini…";
+    hsStatus.className = "status-pill status-busy";
+  }
+
+  if (!hsInput) {
     try {
       const res = await fetch("/.netlify/functions/hs-infer", {
         method: "POST",
@@ -230,11 +246,9 @@ async function runStarterAnalysis() {
             : "HS suggestion unavailable – proceed with caution.";
           hsStatus.className = hsCode ? "status-pill status-ok" : "status-pill status-error";
         }
-      } else {
-        if (hsStatus) {
-          hsStatus.textContent = "HS suggestion failed – continue with heuristics.";
-          hsStatus.className = "status-pill status-error";
-        }
+      } else if (hsStatus) {
+        hsStatus.textContent = "HS suggestion failed – continue with heuristics.";
+        hsStatus.className = "status-pill status-error";
       }
     } catch (err) {
       console.error(err);
@@ -247,18 +261,14 @@ async function runStarterAnalysis() {
 
   const currentRes = computeLandedForCountry(unitCost, volume, currentCountry);
   const rows = [];
-  if (currentRes) {
-    rows.push({ ...currentRes, role: "current" });
-  }
+  if (currentRes) rows.push({ ...currentRes, role: "current" });
 
   COUNTRY_KEYS.forEach(key => {
     if (key === currentCountry) return;
     const res = computeLandedForCountry(unitCost, volume, key);
-    if (!res) return;
-    rows.push({ ...res, role: "alt" });
+    if (res) rows.push({ ...res, role: "alt" });
   });
 
-  // Rank based on priority
   const sorted = [...rows].sort((a, b) => a.annualCost - b.annualCost);
   let recommended = sorted[0];
   if (priority === "nearshore") {
@@ -273,9 +283,9 @@ async function runStarterAnalysis() {
   if (tbody) tbody.innerHTML = "";
   const currentAnnual = currentRes?.annualCost || NaN;
   sorted.forEach(r => {
-    const tr = document.createElement("tr");
     const delta = percentDelta(r.annualCost, currentAnnual);
     const deltaText = isNaN(currentAnnual) || delta === null ? "-" : (delta > 0 ? "+" : "") + delta.toFixed(1) + "%";
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${r.role === "current" ? "Current – " : "Alt – "}${r.label}${r === recommended ? " ★" : ""}</td>
       <td>${formatCurrency(r.base)}</td>
@@ -285,14 +295,15 @@ async function runStarterAnalysis() {
       <td>${formatCurrency(r.annualCost)}</td>
       <td>${r.role === "current" ? "–" : deltaText}</td>
     `;
-    tbody.appendChild(tr);
+    tbody && tbody.appendChild(tr);
   });
 
+  const section = document.getElementById("starter-results-section");
   const nameSpan = document.getElementById("starter-results-product-name");
   const intro = document.getElementById("starter-results-intro");
   const summary = document.getElementById("starter-summary");
   const compliance = document.getElementById("starter-compliance");
-  const section = document.getElementById("starter-results-section");
+
   if (section) section.classList.remove("hidden");
   if (nameSpan) nameSpan.textContent = productName;
 
@@ -307,22 +318,16 @@ async function runStarterAnalysis() {
     summary.textContent =
       `Based on your inputs, the model suggests HS code ${hsCode || "N/A"} for directional duty assumptions. ` +
       `The ${recommended.label} lane benefits from its relative mix of unit cost, duty, and freight. ` +
-      `We would treat this as a short-list candidate for a more formal RFQ and broker review.`;
+      `Treat this as a short-list candidate for a more formal RFQ and broker review.`;
   }
 
   if (compliance) {
     compliance.textContent =
       `This output is indicative only. HS classification is fact-specific and may differ from the model's suggestion. ` +
-      `Before adjusting suppliers or pricing, confirm the HS code, tariff treatment (including any Section 301 or trade remedies), ` +
-      `and compliance requirements (testing, labeling, certifications) with your customs broker or legal counsel.`;
+      `Confirm HS code, tariff treatment (including any trade remedies), and compliance requirements with your customs broker or legal counsel before acting.`;
   }
 
-  starterLastRun = {
-    productName,
-    hsCode,
-    hsReason,
-    rows: sorted
-  };
+  starterLastRun = { productName, hsCode, hsReason, rows: sorted };
 
   if (statusEl) {
     statusEl.textContent = "Starter analysis complete.";
@@ -330,11 +335,9 @@ async function runStarterAnalysis() {
   }
 }
 
-/* Pro analysis (multi-SKU) */
-
+/* Pro: multi-SKU, portfolio narrative */
 function ensureProSkuContainer() {
-  const container = document.getElementById("pro-sku-container");
-  return container;
+  return document.getElementById("pro-sku-container");
 }
 
 function addProSkuRow() {
@@ -428,7 +431,6 @@ async function runProAnalysis() {
     statusEl.className = "status-pill status-busy";
   }
 
-  // HS suggestions for those missing
   const enrichedSkus = [];
   for (const sku of skuInputs) {
     let hsCode = sku.hsCode;
@@ -480,7 +482,7 @@ async function runProAnalysis() {
       <td>${formatCurrency(bestAlt.annualCost)}</td>
       <td>${formatCurrency(savings)}</td>
     `;
-    if (tbody) tbody.appendChild(tr);
+    tbody && tbody.appendChild(tr);
 
     portfolioRows.push({
       skuLabel: sku.label,
@@ -499,9 +501,8 @@ async function runProAnalysis() {
       narrativeBits.push(`${sku.label}: current lane ${currentRes.label} remains directionally competitive on cost.`);
     }
 
-    // simple risk tags
     const risk = [];
-    if (bestAlt.key === "china") risk.push("Section 301 / China exposure");
+    if (bestAlt.key === "china") risk.push("China exposure & trade remedies");
     if (bestAlt.key === "vietnam" || bestAlt.key === "india") risk.push("emerging-labor & FX volatility");
     if (bestAlt.key === "mexico") risk.push("border / trucking capacity");
     if (bestAlt.key === "usa") risk.push("domestic labor cost & capacity");
@@ -534,9 +535,10 @@ async function runProAnalysis() {
 
   if (nextStepsList) {
     nextStepsList.innerHTML = "";
-    ["Short-list 2–3 lanes per SKU for real RFQs.",
-     "Share this pack with your broker / freight partner for validation.",
-     "Layer in service, lead time, and capacity before committing to any shift."
+    [
+      "Short-list 2–3 lanes per SKU for real RFQs.",
+      "Share this pack with your broker / freight partner for validation.",
+      "Layer in service, lead time, and capacity before committing to any shift."
     ].forEach(step => {
       const li = document.createElement("li");
       li.textContent = step;
@@ -566,9 +568,8 @@ async function runProAnalysis() {
 }
 
 /* CSV & PDF helpers */
-
 function downloadCsv(rows, filename) {
-  if (!rows || rows.length === 0) return;
+  if (!rows || !rows.length) return;
   const keys = Object.keys(rows[0]);
   const header = keys.join(",");
   const lines = rows.map(r =>
@@ -592,7 +593,7 @@ function downloadCsv(rows, filename) {
 }
 
 function downloadProPdf() {
-  if (!proLastRun) return;
+  if (!proLastRun || !proLastRun.rows) return;
   const element = document.createElement("div");
   element.innerHTML = `
     <h1>SourcingLens – Pro report</h1>
@@ -617,15 +618,15 @@ function downloadProPdf() {
       ${proLastRun.rows
         .map(
           r => `
-        <tr>
-          <td>${r.skuLabel}</td>
-          <td>${r.currentLane}</td>
-          <td>${r.suggestedLane}</td>
-          <td>${formatCurrency(r.currentAnnual)}</td>
-          <td>${formatCurrency(r.suggestedAnnual)}</td>
-          <td>${formatCurrency(r.annualSavings)}</td>
-          <td>${r.hsCode || ""}</td>
-        </tr>`
+      <tr>
+        <td>${r.skuLabel}</td>
+        <td>${r.currentLane}</td>
+        <td>${r.suggestedLane}</td>
+        <td>${formatCurrency(r.currentAnnual)}</td>
+        <td>${formatCurrency(r.suggestedAnnual)}</td>
+        <td>${formatCurrency(r.annualSavings)}</td>
+        <td>${r.hsCode || ""}</td>
+      </tr>`
         )
         .join("")}
     </table>
