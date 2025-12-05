@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SourcingLens – AI Sourcing & Landed Cost Analyzer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SourcingLens uses AI to infer HS codes and compare directional landed cost, tariffs, and freight across China, Vietnam, Mexico, India, and the US." />
+  <meta name="keywords" content="landed cost calculator, sourcing tool, tariff calculator, HS code, import costs, sourcinglens" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://sourcinglens.com/" />
+  <meta property="og:title" content="SourcingLens – AI Sourcing & Landed Cost Analyzer" />
+  <meta property="og:description" content="AI-powered HS-code inference and landed-cost comparisons to help you decide whether to stay, diversify, or nearshore." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sourcinglens.com/" />
+  <meta property="og:site_name" content="SourcingLens" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SourcingLens – AI Sourcing & Landed Cost Analyzer" />
+  <meta name="twitter:description" content="Run a quick directional sourcing analysis in minutes, not weeks." />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "SourcingLens", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "SourcingLens provides AI-assisted landed-cost and sourcing comparisons across major manufacturing countries.", "offers": {"@type": "Offer", "priceCurrency": "USD", "price": "29.00"}}
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand-block">
+        <a href="#top" class="logo-link" aria-label="SourcingLens home">
+          <span class="logo-mark">◎</span>
+          <span class="logo-text">Sourcing<span>Lens</span></span>
+        </a>
+        <p class="tagline">AI-assisted sourcing clarity in one clean view.</p>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link" href="#how-it-works">How it works</a>
+        <a class="nav-link" href="#pricing">Pricing</a>
+        <a class="nav-link" href="#faq">FAQ</a>
+        <a class="nav-link" href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Should you stay with your current supplier, diversify, or nearshore?</h1>
+          <p class="hero-sub">
+            SourcingLens gives you a directional landed-cost view across China, Vietnam, Mexico, India, and the US.
+            We use GPT‑4.1‑mini to infer HS codes and estimate tariffs, freight and annual spend – so you can quickly
+            see which lanes look promising before you call a broker.
+          </p>
+          <ul class="hero-bullets">
+            <li>LLM-based HS-code suggestions (with clear disclaimers)</li>
+            <li>Directional landed-cost comparison across 5 countries</li>
+            <li>CSV download to share with finance & ops</li>
+          </ul>
+          <div class="hero-cta-row">
+            <a href="#analysis-card" class="btn btn-primary">Run a free directional analysis</a>
+            <a href="#pricing" class="btn btn-ghost">View pricing & Stripe checkout</a>
+          </div>
+          <p class="tiny-note">No login required. Free analysis runs entirely in your browser.</p>
+        </div>
+
+        <div class="hero-card card" id="analysis-card">
+          <div class="card-header">
+            <h2>Quick Sourcing Analysis</h2>
+            <p class="card-sub">A simple, directional check before you invest time in RFQs.</p>
+          </div>
+          <form id="analysis-form" novalidate>
+            <label>
+              Product name
+              <input type="text" id="productName" placeholder="e.g., 750ml insulated water bottle" required />
+            </label>
+
+            <label>
+              Brief product description
+              <textarea id="productDescription" rows="2" placeholder="Key materials, use, coating, food contact, electronics, etc."></textarea>
+              <span class="hint">Helps GPT infer HS code if you leave the HS field blank.</span>
+            </label>
+
+            <label>
+              HS code (optional)
+              <input type="text" id="hsCode" placeholder="e.g., 732393" />
+              <span class="hint">If empty, SourcingLens will call GPT‑4.1‑mini to suggest a likely HS6 family.</span>
+            </label>
+
+            <div class="grid-2">
+              <label>
+                Current supplier country
+                <select id="currentCountry" required>
+                  <option value="">Select...</option>
+                  <option value="china">China</option>
+                  <option value="vietnam">Vietnam</option>
+                  <option value="mexico">Mexico</option>
+                  <option value="india">India</option>
+                  <option value="usa">United States</option>
+                </select>
+              </label>
+
+              <label>
+                Current unit cost (USD)
+                <input type="number" id="unitCost" min="0" step="0.01" placeholder="e.g., 4.50" required />
+              </label>
+            </div>
+
+            <div class="grid-2">
+              <label>
+                Annual volume (units)
+                <input type="number" id="annualVolume" min="1" step="1" placeholder="e.g., 10000" required />
+              </label>
+
+              <label>
+                Priority
+                <select id="priority">
+                  <option value="cost">Lowest cost</option>
+                  <option value="balance">Balance cost & risk</option>
+                  <option value="nearshore">Nearshoring / USMCA</option>
+                  <option value="us">US / local preference</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="status-row">
+              <span id="hsStatus" class="status-pill status-idle">HS code: using your input</span>
+              <span id="analysisStatus" class="status-pill status-idle">Ready to run</span>
+            </div>
+
+            <button type="submit" id="runButton" class="btn btn-primary btn-full">
+              Run free analysis
+            </button>
+            <p class="disclaimer">
+              Outputs are <strong>directional estimates only</strong> based on assumptions in this tool.
+              They are not legal, tax, or customs advice. Always confirm HS codes and duties with your broker or counsel.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="results-section" class="results-section hidden">
+      <div class="container results-container">
+        <div class="results-header">
+          <div>
+            <h2>Directional results for <span id="results-product-name"></span></h2>
+            <p id="results-intro" class="results-intro"></p>
+          </div>
+          <button id="downloadCsvButton" class="btn btn-outline">Download CSV</button>
+        </div>
+
+        <div class="results-layout">
+          <div class="results-main">
+            <div class="table-card card">
+              <div class="table-caption-row">
+                <p class="caption-title">Landed-cost comparison (by country)</p>
+                <p class="caption-note">Values in USD, based on your unit cost and our internal heuristics.</p>
+              </div>
+              <div class="table-wrapper" aria-label="Landed cost comparison table">
+                <table id="results-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Option</th>
+                      <th scope="col">Unit base</th>
+                      <th scope="col">Tariff</th>
+                      <th scope="col">Shipping</th>
+                      <th scope="col">Total landed</th>
+                      <th scope="col">Annual cost</th>
+                      <th scope="col">vs current</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="metrics-grid">
+              <div class="metric card">
+                <h3>Suggested option</h3>
+                <p id="best-option" class="metric-main"></p>
+                <p class="metric-note">Purely on directional landed-cost assumptions. Does not factor supplier reliability.</p>
+              </div>
+              <div class="metric card">
+                <h3>Estimated annual savings</h3>
+                <p id="annual-savings" class="metric-main"></p>
+                <p class="metric-note">Versus your current lane. Negative values mean your current lane looks competitive.</p>
+              </div>
+              <div class="metric card">
+                <h3>Payback intuition</h3>
+                <p id="payback" class="metric-main"></p>
+                <p class="metric-note">Helps frame whether it’s worth a formal sourcing project.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="results-side">
+            <div class="card subtle">
+              <h3>Narrative interpretation</h3>
+              <p id="analysis-summary" class="side-text"></p>
+              <ul id="analysis-actions" class="side-list"></ul>
+            </div>
+
+            <div class="card subtle">
+              <h3>Compliance & risk notes</h3>
+              <p id="compliance-notes" class="side-text"></p>
+            </div>
+
+            <div class="card subtle hidden" id="us-suppliers-card">
+              <h3>US supplier directories to explore</h3>
+              <p class="side-text">
+                Since the US appears as the cheapest or most reasonable directional option in this run,
+                here are starting points to look for domestic manufacturers:
+              </p>
+              <ul id="us-suppliers-list" class="side-list"></ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how-section">
+      <div class="container">
+        <h2>How SourcingLens works</h2>
+        <div class="how-grid">
+          <div class="how-step card">
+            <h3>1. Normalize your current lane</h3>
+            <p>
+              Your current supplier country and unit cost act as the anchor. If you don’t provide an HS code,
+              we call GPT‑4.1‑mini with your product description to infer a likely HS6 family.
+            </p>
+          </div>
+          <div class="how-step card">
+            <h3>2. Apply country profiles</h3>
+            <p>
+              For each profiled country, we apply internal multipliers to estimate base manufacturing cost,
+              tariffs, and freight per unit. These are heuristics, not official rates.
+            </p>
+          </div>
+          <div class="how-step card">
+            <h3>3. Compare & export</h3>
+            <p>
+              We rank countries by directional landed cost, highlight potential savings,
+              and let you download the full table as CSV to share with your team.
+            </p>
+          </div>
+        </div>
+        <p class="how-note">
+          Always validate HS codes, duties, and regulations with your customs broker or trade counsel before acting.
+          SourcingLens is an analysis aid, not a filing or compliance system.
+        </p>
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+      <div class="container">
+        <h2>Pricing</h2>
+        <p class="pricing-intro">
+          Start with a free browser-based analysis, then upgrade to Stripe-powered paid tiers when you’re ready
+          to share structured outputs with stakeholders or run multiple SKUs.
+        </p>
+        <div class="pricing-grid">
+          <article class="price-card card">
+            <h3>Free</h3>
+            <p class="price-main">$0</p>
+            <p class="price-tagline">Quick directional check in your browser.</p>
+            <ul class="price-list">
+              <li>1 analysis per browser session</li>
+              <li>Full comparison table visible</li>
+              <li>CSV export enabled</li>
+              <li>Optional GPT-based HS suggestion</li>
+            </ul>
+            <button class="btn btn-ghost btn-full" type="button" onclick="document.getElementById('analysis-card').scrollIntoView({behavior:'smooth'});">
+              Run free analysis
+            </button>
+          </article>
+
+          <article class="price-card card recommended">
+            <div class="badge">Most popular</div>
+            <h3>Starter Report</h3>
+            <p class="price-main">$29</p>
+            <p class="price-tagline">One-off report for a single product.</p>
+            <ul class="price-list">
+              <li>Full landed-cost report for one SKU</li>
+              <li>All 5 countries included</li>
+              <li>CSV + narrative summary</li>
+              <li>Ideal for Amazon sellers & smaller brands</li>
+            </ul>
+            <a class="btn btn-primary btn-full" href="https://buy.stripe.com/7sYaEXe2G4bM0PT6Mk3sI07" target="_blank" rel="noopener noreferrer">
+              Buy Starter Report
+            </a>
+          </article>
+
+          <article class="price-card card">
+            <h3>Pro Report</h3>
+            <p class="price-main">$89</p>
+            <p class="price-tagline">Deeper one-off sourcing report.</p>
+            <ul class="price-list">
+              <li>Everything in Starter</li>
+              <li>Expanded lane commentary</li>
+              <li>Suggested next steps & scenarios</li>
+              <li>Great for sourcing / ops managers</li>
+            </ul>
+            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/3cI8wPcYC37I8ilc6E3sI08" target="_blank" rel="noopener noreferrer">
+              Buy Pro Report
+            </a>
+          </article>
+
+          <article class="price-card card">
+            <h3>Pro Monthly</h3>
+            <p class="price-main">$49<span>/month</span></p>
+            <p class="price-tagline">For recurring importers comparing multiple SKUs.</p>
+            <ul class="price-list">
+              <li>Up to 10 analyses per month</li>
+              <li>All countries + CSV exports</li>
+              <li>Priority email responses</li>
+              <li>Best for DTC & marketplace brands</li>
+            </ul>
+            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/6oUdR93o26jU5694Ec3sI09" target="_blank" rel="noopener noreferrer">
+              Choose Pro Monthly
+            </a>
+          </article>
+
+          <article class="price-card card">
+            <h3>Business</h3>
+            <p class="price-main">$99<span>/month</span></p>
+            <p class="price-tagline">For small teams with regular import decisions.</p>
+            <ul class="price-list">
+              <li>Up to 30 analyses per month</li>
+              <li>CSV portfolio exports</li>
+              <li>Priority support</li>
+            </ul>
+            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/6oUdR9cYC23E8il8Us3sI0a" target="_blank" rel="noopener noreferrer">
+              Choose Business
+            </a>
+          </article>
+
+          <article class="price-card card">
+            <h3>Enterprise</h3>
+            <p class="price-main">$399<span>/month</span></p>
+            <p class="price-tagline">For ops-heavy orgs that live in sourcing decisions.</p>
+            <ul class="price-list">
+              <li>Unlimited analyses</li>
+              <li>Team access (via shared account)</li>
+              <li>API support (as available)</li>
+            </ul>
+            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/5kQ6oH7Ei0ZA8ilgmU3sI0b" target="_blank" rel="noopener noreferrer">
+              Talk to sales / prepay
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <h2>FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item card">
+            <h3>Is this a customs or legal tool?</h3>
+            <p>No. SourcingLens is an analysis aid only. It helps you get directional clarity before you spend time and money on formal quotes or broker work.</p>
+          </div>
+          <div class="faq-item card">
+            <h3>How accurate are HS suggestions?</h3>
+            <p>GPT‑4.1‑mini is very strong at pattern recognition, but HS classification is nuanced. Always confirm with your broker. Treat HS suggestions here as a starting point, not a final answer.</p>
+          </div>
+          <div class="faq-item card">
+            <h3>Will you store my product details?</h3>
+            <p>This MVP is designed to be light touch. Avoid entering sensitive information. If you self-host, your own configuration controls what is logged.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> SourcingLens. All rights reserved.</p>
+      <p class="footer-links">
+        <a href="privacy.html">Privacy</a> •
+        <a href="terms.html">Terms</a> •
+        <a href="disclaimer.html">Disclaimer</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
