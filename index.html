@@ -4,21 +4,21 @@
   <meta charset="UTF-8" />
   <title>SourcingLens – AI Sourcing & Landed Cost Analyzer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="SourcingLens uses AI to infer HS codes and compare directional landed cost, tariffs, and freight across China, Vietnam, Mexico, India, and the US." />
-  <meta name="keywords" content="landed cost calculator, sourcing tool, tariff calculator, HS code, import costs, sourcinglens" />
+  <meta name="description" content="SourcingLens uses AI to compare landed cost across sourcing countries and provide directional insights before you call a broker." />
+  <meta name="keywords" content="landed cost calculator, sourcing tool, tariff calculator, HS code, import costs, nearshoring" />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://sourcinglens.com/" />
   <meta property="og:title" content="SourcingLens – AI Sourcing & Landed Cost Analyzer" />
-  <meta property="og:description" content="AI-powered HS-code inference and landed-cost comparisons to help you decide whether to stay, diversify, or nearshore." />
+  <meta property="og:description" content="Run a quick directional sourcing check for free, then upgrade for AI-driven HS analysis and multi-SKU reports." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sourcinglens.com/" />
   <meta property="og:site_name" content="SourcingLens" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="SourcingLens – AI Sourcing & Landed Cost Analyzer" />
-  <meta name="twitter:description" content="Run a quick directional sourcing analysis in minutes, not weeks." />
+  <meta name="twitter:description" content="Free 1-vs-1 sourcing comparison, with paid tiers for AI-powered HS analysis and multi-SKU reports." />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "SourcingLens", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "SourcingLens provides AI-assisted landed-cost and sourcing comparisons across major manufacturing countries.", "offers": {"@type": "Offer", "priceCurrency": "USD", "price": "29.00"}}
+  {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "SourcingLens", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "SourcingLens provides AI-assisted landed-cost and sourcing comparisons to help brands decide whether to stay, diversify, or nearshore.", "offers": {"@type": "Offer", "priceCurrency": "USD", "price": "29.00"}}
   </script>
 </head>
 <body>
@@ -29,66 +29,55 @@
           <span class="logo-mark">◎</span>
           <span class="logo-text">Sourcing<span>Lens</span></span>
         </a>
-        <p class="tagline">AI-assisted sourcing clarity in one clean view.</p>
+        <p class="tagline">From hunches to directional sourcing math.</p>
       </div>
       <nav class="nav-links">
+        <a class="nav-link" href="#free">Free tool</a>
+        <a class="nav-link" href="#starter">Starter &amp; Pro</a>
+        <a class="nav-link" href="#pro-monthly">Pro Monthly</a>
         <a class="nav-link" href="#how-it-works">How it works</a>
-        <a class="nav-link" href="#pricing">Pricing</a>
         <a class="nav-link" href="#faq">FAQ</a>
-        <a class="nav-link" href="privacy.html">Privacy</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
+    <!-- HERO -->
     <section class="hero-section">
       <div class="container hero-grid">
         <div class="hero-text">
-          <h1>Should you stay with your current supplier, diversify, or nearshore?</h1>
+          <h1>Should you stay with your current supplier, switch lanes, or nearshore?</h1>
           <p class="hero-sub">
-            SourcingLens gives you a directional landed-cost view across China, Vietnam, Mexico, India, and the US.
-            We use GPT-4.1-mini to infer HS codes and estimate tariffs, freight and annual spend – so you can quickly
-            see which lanes look promising before you call a broker.
+            SourcingLens gives you a directional landed-cost view before you burn cycles on RFQs.
+            Start with a free 1-vs-1 comparison, then upgrade for AI-enabled HS analysis and multi-SKU reports.
           </p>
           <ul class="hero-bullets">
-            <li>LLM-based HS-code suggestions (with clear disclaimers)</li>
-            <li>Directional landed-cost comparison across 5 countries</li>
-            <li>CSV download to share with finance &amp; ops</li>
+            <li>Free: simple 1-vs-1 lane comparison (no HS, no CSV)</li>
+            <li>Starter: 1 SKU, 5-country AI-powered comparison with HS suggestion &amp; CSV</li>
+            <li>Pro &amp; Pro Monthly: up to 5 SKUs, richer narratives, PDF packs, and risk panels</li>
           </ul>
           <div class="hero-cta-row">
-            <a href="#analysis-card" class="btn btn-primary">Run a free directional analysis</a>
-            <a href="#pricing" class="btn btn-ghost">View pricing &amp; Stripe checkout</a>
+            <a href="#free" class="btn btn-primary">Run free 1-vs-1 comparison</a>
+            <a href="#starter" class="btn btn-ghost">See paid tiers</a>
           </div>
-          <p class="tiny-note">No login required. Free analysis runs entirely in your browser.</p>
         </div>
 
-        <div class="hero-card card" id="analysis-card">
+        <!-- FREE 1-vs-1 CARD -->
+        <div class="hero-card card" id="free">
           <div class="card-header">
-            <h2>Quick Sourcing Analysis</h2>
-            <p class="card-sub">A simple, directional check before you invest time in RFQs.</p>
+            <h2>Free 1-vs-1 Sourcing Check</h2>
+            <p class="card-sub">Compare your current lane against one alternate country.</p>
           </div>
-          <form id="analysis-form" novalidate onsubmit="return false;">
+          <form id="free-form" novalidate onsubmit="return false;">
             <label>
               Product name
-              <input type="text" id="productName" placeholder="e.g., 750ml insulated water bottle" required />
-            </label>
-
-            <label>
-              Brief product description
-              <textarea id="productDescription" rows="2" placeholder="Key materials, use, coating, food contact, electronics, etc."></textarea>
-              <span class="hint">Helps GPT infer HS code if you leave the HS field blank.</span>
-            </label>
-
-            <label>
-              HS code (optional)
-              <input type="text" id="hsCode" placeholder="e.g., 732393" />
-              <span class="hint">If empty, SourcingLens will call GPT-4.1-mini to suggest a likely HS6 family.</span>
+              <input type="text" id="freeProductName" placeholder="e.g., 750ml insulated water bottle" required />
             </label>
 
             <div class="grid-2">
               <label>
                 Current supplier country
-                <select id="currentCountry" required>
+                <select id="freeCurrentCountry" required>
                   <option value="">Select...</option>
                   <option value="china">China</option>
                   <option value="vietnam">Vietnam</option>
@@ -97,274 +86,525 @@
                   <option value="usa">United States</option>
                 </select>
               </label>
-
               <label>
                 Current unit cost (USD)
-                <input type="number" id="unitCost" min="0" step="0.01" placeholder="e.g., 4.50" required />
+                <input type="number" id="freeUnitCost" min="0" step="0.01" placeholder="e.g., 4.50" required />
               </label>
             </div>
 
             <div class="grid-2">
               <label>
                 Annual volume (units)
-                <input type="number" id="annualVolume" min="1" step="1" placeholder="e.g., 10000" required />
+                <input type="number" id="freeAnnualVolume" min="1" step="1" placeholder="e.g., 10000" required />
               </label>
-
               <label>
-                Priority
-                <select id="priority">
-                  <option value="cost">Lowest cost</option>
-                  <option value="balance">Balance cost &amp; risk</option>
-                  <option value="nearshore">Nearshoring / USMCA</option>
-                  <option value="us">US / local preference</option>
+                Compare against
+                <select id="freeCompareCountry" required>
+                  <option value="">Select...</option>
+                  <option value="china">China</option>
+                  <option value="vietnam">Vietnam</option>
+                  <option value="mexico">Mexico</option>
+                  <option value="india">India</option>
+                  <option value="usa">United States</option>
                 </select>
               </label>
             </div>
 
+            <p class="hint">
+              This free view uses simplified cost / duty assumptions and does <strong>not</strong> use AI HS-code inference.
+              Upgrade to Starter to unlock HS suggestions, 5-country comparison, CSV, and narratives.
+            </p>
+
             <div class="status-row">
-              <span id="hsStatus" class="status-pill status-idle">HS code: using your input</span>
-              <span id="analysisStatus" class="status-pill status-idle">Ready to run</span>
+              <span id="freeStatus" class="status-pill status-idle">Ready to run</span>
             </div>
 
-            <button type="button" id="runButton" class="btn btn-primary btn-full">
-              Run free analysis
+            <button type="button" id="freeRunButton" class="btn btn-primary btn-full">
+              Run free comparison
             </button>
-            <p class="disclaimer">
-              Outputs are <strong>directional estimates only</strong> based on assumptions in this tool.
-              They are not legal, tax, or customs advice. Always confirm HS codes and duties with your broker or counsel.
-            </p>
           </form>
         </div>
       </div>
     </section>
 
-    <section id="results-section" class="results-section hidden">
+    <!-- FREE RESULTS -->
+    <section id="free-results-section" class="results-section hidden">
       <div class="container results-container">
         <div class="results-header">
           <div>
-            <h2>Directional results for <span id="results-product-name"></span></h2>
-            <p id="results-intro" class="results-intro"></p>
+            <h2>Free comparison for <span id="free-results-product-name"></span></h2>
+            <p id="free-results-intro" class="results-intro"></p>
           </div>
-          <button id="downloadCsvButton" class="btn btn-outline">Download CSV</button>
         </div>
-
         <div class="results-layout">
           <div class="results-main">
             <div class="table-card card">
               <div class="table-caption-row">
-                <p class="caption-title">Landed-cost comparison (by country)</p>
-                <p class="caption-note">Values in USD, based on your unit cost and our internal heuristics.</p>
+                <p class="caption-title">Current lane vs selected alternative</p>
+                <p class="caption-note">Indicative only – upgrade to Starter for HS-aware, 5-country view + CSV.</p>
               </div>
-              <div class="table-wrapper" aria-label="Landed cost comparison table">
-                <table id="results-table">
+              <div class="table-wrapper">
+                <table id="free-results-table">
                   <thead>
                     <tr>
-                      <th scope="col">Option</th>
-                      <th scope="col">Unit base</th>
-                      <th scope="col">Tariff</th>
-                      <th scope="col">Shipping</th>
-                      <th scope="col">Total landed</th>
-                      <th scope="col">Annual cost</th>
-                      <th scope="col">vs current</th>
+                      <th>Option</th>
+                      <th>Unit base</th>
+                      <th>Tariff</th>
+                      <th>Shipping</th>
+                      <th>Total landed</th>
+                      <th>Annual cost</th>
+                      <th>vs current</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
                 </table>
               </div>
             </div>
-
-            <div class="metrics-grid">
-              <div class="metric card">
-                <h3>Suggested option</h3>
-                <p id="best-option" class="metric-main"></p>
-                <p class="metric-note">Purely on directional landed-cost assumptions. Does not factor supplier reliability.</p>
-              </div>
-              <div class="metric card">
-                <h3>Estimated annual savings</h3>
-                <p id="annual-savings" class="metric-main"></p>
-                <p class="metric-note">Versus your current lane. Negative values mean your current lane looks competitive.</p>
-              </div>
-              <div class="metric card">
-                <h3>Payback intuition</h3>
-                <p id="payback" class="metric-main"></p>
-                <p class="metric-note">Helps frame whether it’s worth a formal sourcing project.</p>
-              </div>
-            </div>
           </div>
-
           <aside class="results-side">
             <div class="card subtle">
-              <h3>Narrative interpretation</h3>
-              <p id="analysis-summary" class="side-text"></p>
-              <ul id="analysis-actions" class="side-list"></ul>
-            </div>
-
-            <div class="card subtle">
-              <h3>Compliance &amp; risk notes</h3>
-              <p id="compliance-notes" class="side-text"></p>
-            </div>
-
-            <div class="card subtle hidden" id="us-suppliers-card">
-              <h3>US supplier directories to explore</h3>
+              <h3>Want the full picture?</h3>
               <p class="side-text">
-                Since the US appears as the cheapest or most reasonable directional option in this run,
-                here are starting points to look for domestic manufacturers:
+                Starter unlocks GPT-powered HS suggestions, 5-country comparison, CSV export, and narrative commentary
+                for one SKU. Pro and Pro Monthly expand this across multiple SKUs.
               </p>
-              <ul id="us-suppliers-list" class="side-list"></ul>
+              <a href="#starter" class="btn btn-outline btn-full">View paid plans</a>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
+    <!-- STARTER & PRO SECTION -->
+    <section id="starter" class="paid-section">
+      <div class="container">
+        <h2>Starter &amp; Pro – AI-enabled landed cost analysis</h2>
+        <p class="pricing-intro">
+          Starter is for one SKU. Pro scales to up to five SKUs in a single run, with richer narrative and risk insights.
+          Both tiers unlock GPT-4.1-mini-based HS suggestions and 5-country comparison.
+        </p>
+
+        <div class="pricing-grid compact">
+          <article class="price-card card">
+            <h3>Starter (one-off)</h3>
+            <p class="price-main">$29</p>
+            <p class="price-tagline">One product, 5-country analysis.</p>
+            <ul class="price-list">
+              <li>1 SKU analysis per purchase</li>
+              <li>GPT-enabled HS suggestion</li>
+              <li>5-country landed-cost comparison</li>
+              <li>CSV export</li>
+              <li>Short narrative + compliance notes</li>
+            </ul>
+            <!-- TODO: replace href with your real Stripe payment link -->
+            <a class="btn btn-primary btn-full" href="https://buy.stripe.com/YOUR_STARTER_LINK" target="_blank" rel="noopener noreferrer">
+              Buy Starter report
+            </a>
+          </article>
+
+          <article class="price-card card recommended">
+            <div class="badge">Most popular</div>
+            <h3>Pro (one-off)</h3>
+            <p class="price-main">$89</p>
+            <p class="price-tagline">Up to 5 SKUs, richer report.</p>
+            <ul class="price-list">
+              <li>Up to 5 SKUs in one run</li>
+              <li>GPT-enabled HS suggestions for each</li>
+              <li>5-country comparison per SKU</li>
+              <li>Portfolio CSV export</li>
+              <li>Extended narrative &amp; risk panel</li>
+              <li>“Top 3 next steps” checklist</li>
+              <li>PDF pack (print-ready)</li>
+            </ul>
+            <!-- TODO: replace href with your real Stripe payment link -->
+            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/YOUR_PRO_LINK" target="_blank" rel="noopener noreferrer">
+              Buy Pro pack
+            </a>
+          </article>
+        </div>
+
+        <!-- STARTER/PRO DEMO WORKSPACE (client-side; Stripe gating is via success URL) -->
+        <div class="card starter-demo-card">
+          <h3>Starter / Pro workspace</h3>
+          <p class="side-text">
+            Use this workspace after purchase to generate your analyses. In production, gate access via Stripe success URLs and/or a purchase code.
+          </p>
+          <div class="tabs">
+            <button class="tab-button active" data-tab="starter-tab">Starter – 1 SKU</button>
+            <button class="tab-button" data-tab="pro-tab">Pro – up to 5 SKUs</button>
+          </div>
+
+          <div id="starter-tab" class="tab-panel active">
+            <form id="starter-form" novalidate onsubmit="return false;">
+              <label>
+                Product name
+                <input type="text" id="starterProductName" required />
+              </label>
+              <label>
+                Product description
+                <textarea id="starterProductDescription" rows="2" placeholder="Key materials, use, coatings, electronics, etc." required></textarea>
+              </label>
+              <label>
+                HS code (optional – leave blank to let GPT-4.1-mini suggest)
+                <input type="text" id="starterHsCode" placeholder="e.g. 732393" />
+              </label>
+
+              <div class="grid-2">
+                <label>
+                  Current supplier country
+                  <select id="starterCurrentCountry" required>
+                    <option value="">Select...</option>
+                    <option value="china">China</option>
+                    <option value="vietnam">Vietnam</option>
+                    <option value="mexico">Mexico</option>
+                    <option value="india">India</option>
+                    <option value="usa">United States</option>
+                  </select>
+                </label>
+                <label>
+                  Current unit cost (USD)
+                  <input type="number" id="starterUnitCost" min="0" step="0.01" required />
+                </label>
+              </div>
+
+              <div class="grid-2">
+                <label>
+                  Annual volume (units)
+                  <input type="number" id="starterAnnualVolume" min="1" step="1" required />
+                </label>
+                <label>
+                  Priority
+                  <select id="starterPriority">
+                    <option value="cost">Lowest cost</option>
+                    <option value="balance">Balance cost &amp; risk</option>
+                    <option value="nearshore">Nearshoring / USMCA</option>
+                    <option value="us">US / local preference</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="status-row">
+                <span id="starterHsStatus" class="status-pill status-idle">HS code: using your input</span>
+                <span id="starterStatus" class="status-pill status-idle">Ready to run</span>
+              </div>
+
+              <button type="button" class="btn btn-primary btn-full" id="starterRunButton">
+                Run Starter analysis
+              </button>
+              <p class="disclaimer">
+                HS suggestions are generated via GPT-4.1-mini and are indicative only. Always confirm with your broker.
+              </p>
+            </form>
+
+            <div id="starter-results-section" class="results-section nested hidden">
+              <div class="results-header">
+                <div>
+                  <h3>Starter results for <span id="starter-results-product-name"></span></h3>
+                  <p id="starter-results-intro" class="results-intro"></p>
+                </div>
+                <button id="starterDownloadCsvButton" class="btn btn-outline">Download CSV</button>
+              </div>
+              <div class="results-layout">
+                <div class="results-main">
+                  <div class="table-card card">
+                    <div class="table-caption-row">
+                      <p class="caption-title">5-country comparison</p>
+                      <p class="caption-note">Directional view based on your inputs and simplified heuristics.</p>
+                    </div>
+                    <div class="table-wrapper">
+                      <table id="starter-results-table">
+                        <thead>
+                          <tr>
+                            <th>Option</th>
+                            <th>Unit base</th>
+                            <th>Tariff</th>
+                            <th>Shipping</th>
+                            <th>Total landed</th>
+                            <th>Annual cost</th>
+                            <th>vs current</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <aside class="results-side">
+                  <div class="card subtle">
+                    <h3>Narrative summary</h3>
+                    <p id="starter-summary" class="side-text"></p>
+                  </div>
+                  <div class="card subtle">
+                    <h3>Compliance &amp; risk notes</h3>
+                    <p id="starter-compliance" class="side-text"></p>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+
+          <div id="pro-tab" class="tab-panel">
+            <p class="side-text">
+              Pro lets you run up to five SKUs at once. Add up to five product rows, then run the
+              multi-SKU engine to see aggregated results.
+            </p>
+            <form id="pro-form" novalidate onsubmit="return false;">
+              <div id="pro-sku-container"></div>
+              <button type="button" class="btn btn-ghost" id="proAddSkuButton">+ Add SKU</button>
+              <div class="status-row">
+                <span id="proStatus" class="status-pill status-idle">Ready to run (0 SKUs added, max 5)</span>
+              </div>
+              <button type="button" class="btn btn-primary btn-full" id="proRunButton">
+                Run Pro analysis (up to 5 SKUs)
+              </button>
+            </form>
+
+            <div id="pro-results-section" class="results-section nested hidden">
+              <div class="results-header">
+                <div>
+                  <h3>Pro results (portfolio)</h3>
+                  <p id="pro-results-intro" class="results-intro"></p>
+                </div>
+                <div class="results-actions">
+                  <button id="proDownloadCsvButton" class="btn btn-outline">Download portfolio CSV</button>
+                  <button id="proDownloadPdfButton" class="btn btn-outline">Download PDF pack (print view)</button>
+                </div>
+              </div>
+              <div class="results-layout">
+                <div class="results-main">
+                  <div class="table-card card">
+                    <div class="table-caption-row">
+                      <p class="caption-title">SKU-by-SKU summary</p>
+                      <p class="caption-note">Highlights where savings may justify a sourcing project.</p>
+                    </div>
+                    <div class="table-wrapper">
+                      <table id="pro-results-table">
+                        <thead>
+                          <tr>
+                            <th>SKU</th>
+                            <th>Suggested lane</th>
+                            <th>Annual cost current</th>
+                            <th>Annual cost suggested</th>
+                            <th>Annual savings</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="metrics-grid">
+                    <div class="metric card">
+                      <h3>Total estimated annual savings</h3>
+                      <p id="pro-total-savings" class="metric-main"></p>
+                      <p class="metric-note">Sum of positive savings across all SKUs.</p>
+                    </div>
+                    <div class="metric card">
+                      <h3>Portfolio narrative</h3>
+                      <p id="pro-portfolio-summary" class="metric-main"></p>
+                    </div>
+                  </div>
+                </div>
+
+                <aside class="results-side">
+                  <div class="card subtle">
+                    <h3>Risk drivers panel</h3>
+                    <p id="pro-risk-panel" class="side-text"></p>
+                  </div>
+                  <div class="card subtle">
+                    <h3>Top 3 next steps</h3>
+                    <ul id="pro-next-steps" class="side-list"></ul>
+                  </div>
+                  <div class="card subtle">
+                    <h3>Save to Pro Monthly</h3>
+                    <p class="side-text">
+                      If you're logged in via Pro Monthly, you can save this run to your dashboard.
+                    </p>
+                    <button type="button" class="btn btn-outline btn-full" id="proSaveToDashboardButton">
+                      Save latest Pro run to dashboard
+                    </button>
+                    <p id="dashboardSaveStatus" class="hint"></p>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRO MONTHLY SECTION -->
+    <section id="pro-monthly" class="paid-section alt-bg">
+      <div class="container">
+        <h2>Pro Monthly – recurring analyses with light accounts</h2>
+        <p class="pricing-intro">
+          Pro Monthly gives you recurring access to the Pro engine with a light account system powered by Supabase
+          (email + magic link). This MVP uses Supabase Auth and a simple <code>analyses</code> table to persist results.
+        </p>
+
+        <div class="pricing-grid compact">
+          <article class="price-card card">
+            <h3>Pro Monthly</h3>
+            <p class="price-main">$49<span>/month</span></p>
+            <p class="price-tagline">For recurring importers and small teams.</p>
+            <ul class="price-list">
+              <li>Same capabilities as Pro</li>
+              <li>Run analyses across the month</li>
+              <li>Store analysis history in Supabase</li>
+              <li>Email + magic link login (no passwords)</li>
+            </ul>
+            <!-- TODO: replace href with your real Stripe subscription link -->
+            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/YOUR_PRO_MONTHLY_LINK" target="_blank" rel="noopener noreferrer">
+              Subscribe to Pro Monthly
+            </a>
+          </article>
+
+          <article class="price-card card">
+            <h3>Business &amp; Enterprise</h3>
+            <p class="price-main">Coming soon</p>
+            <p class="price-tagline">Higher volumes, more structure.</p>
+            <ul class="price-list">
+              <li>Higher SKU volumes</li>
+              <li>Team-oriented dashboards</li>
+              <li>API access and SLAs</li>
+              <li>Custom workflows and onboarding</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="card dashboard-card">
+          <h3>Pro Monthly dashboard (MVP)</h3>
+          <p class="side-text">
+            This section wires in Supabase for authentication and storage. To use it, configure
+            your <code>analyses</code> table as described in the README.
+          </p>
+
+          <div id="auth-panel">
+            <div id="auth-logged-out">
+              <h4>Sign in with email</h4>
+              <p class="side-text">
+                Enter your email to receive a magic link for dashboard access.
+              </p>
+              <form id="auth-form" onsubmit="return false;">
+                <label>
+                  Work email
+                  <input type="email" id="authEmail" required />
+                </label>
+                <button type="button" class="btn btn-primary" id="authSendLinkButton">Send magic link</button>
+                <p id="authStatus" class="hint"></p>
+              </form>
+            </div>
+
+            <div id="auth-logged-in" class="hidden">
+              <p class="side-text">
+                Logged in as <span id="authUserEmail"></span>.
+              </p>
+              <button type="button" class="btn btn-ghost" id="authSignOutButton">Sign out</button>
+            </div>
+          </div>
+
+          <div id="dashboard-main" class="hidden">
+            <h4>Your saved analyses</h4>
+            <p class="side-text">
+              Every time you run a Pro-style analysis while logged in, you can save it here and reload later.
+            </p>
+            <div class="results-layout">
+              <div class="results-main">
+                <div class="table-card card">
+                  <div class="table-caption-row">
+                    <p class="caption-title">Saved runs</p>
+                    <p class="caption-note">Each row represents one multi-SKU analysis.</p>
+                  </div>
+                  <div class="table-wrapper">
+                    <table id="dashboard-table">
+                      <thead>
+                        <tr>
+                          <th>Created at</th>
+                          <th>Label</th>
+                          <th>SKU count</th>
+                          <th>Est. portfolio savings</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <aside class="results-side">
+                <div class="card subtle">
+                  <h3>How saving works</h3>
+                  <p class="side-text">
+                    When you run a Pro analysis above while logged in, click “Save latest Pro run to dashboard”
+                    to persist it in Supabase.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
     <section id="how-it-works" class="how-section">
       <div class="container">
         <h2>How SourcingLens works</h2>
         <div class="how-grid">
           <div class="how-step card">
-            <h3>1. Normalize your current lane</h3>
+            <h3>1. Free 1-vs-1 comparison</h3>
             <p>
-              Your current supplier country and unit cost act as the anchor. If you don’t provide an HS code,
-              we call GPT-4.1-mini with your product description to infer a likely HS6 family.
+              The free tool lets you sanity-check one alternative lane against your current supplier using simplified
+              cost and duty heuristics. No HS codes, no CSV – just a quick directional read.
             </p>
           </div>
           <div class="how-step card">
-            <h3>2. Apply country profiles</h3>
+            <h3>2. Starter &amp; Pro (AI-enabled)</h3>
             <p>
-              For each profiled country, we apply internal multipliers to estimate base manufacturing cost,
-              tariffs, and freight per unit. These are heuristics, not official rates.
+              Starter and Pro unlock GPT-4.1-mini-based HS suggestions and 5-country comparisons. You get CSV exports,
+              narrative summaries, compliance notes, and for Pro, a richer multi-SKU report with a risk panel.
             </p>
           </div>
           <div class="how-step card">
-            <h3>3. Compare &amp; export</h3>
+            <h3>3. Pro Monthly &amp; beyond</h3>
             <p>
-              We rank countries by directional landed cost, highlight potential savings,
-              and let you download the full table as CSV to share with your team.
+              Pro Monthly adds a light account layer backed by Supabase so you can store and revisit analyses. Business
+              and Enterprise tiers (coming soon) will add higher SKU volumes, team-oriented dashboards, and API options.
             </p>
           </div>
         </div>
         <p class="how-note">
-          Always validate HS codes, duties, and regulations with your customs broker or trade counsel before acting.
-          SourcingLens is an analysis aid, not a filing or compliance system.
+          SourcingLens is an analysis aid only. All HS suggestions and landed-cost outputs are indicative and must be
+          validated with your customs broker, legal counsel, or other qualified advisors before you act.
         </p>
       </div>
     </section>
 
-    <section id="pricing" class="pricing-section">
-      <div class="container">
-        <h2>Pricing</h2>
-        <p class="pricing-intro">
-          Start with a free browser-based analysis, then upgrade to Stripe-powered paid tiers when you’re ready
-          to share structured outputs with stakeholders or run multiple SKUs.
-        </p>
-        <div class="pricing-grid">
-          <article class="price-card card">
-            <h3>Free</h3>
-            <p class="price-main">$0</p>
-            <p class="price-tagline">Quick directional check in your browser.</p>
-            <ul class="price-list">
-              <li>1 analysis per browser session</li>
-              <li>Full comparison table visible</li>
-              <li>CSV export enabled</li>
-              <li>Optional GPT-based HS suggestion</li>
-            </ul>
-            <button class="btn btn-ghost btn-full" type="button" onclick="document.getElementById('analysis-card').scrollIntoView({ behavior: 'smooth' });">
-              Run free analysis
-            </button>
-          </article>
-
-          <article class="price-card card recommended">
-            <div class="badge">Most popular</div>
-            <h3>Starter Report</h3>
-            <p class="price-main">$29</p>
-            <p class="price-tagline">One-off report for a single product.</p>
-            <ul class="price-list">
-              <li>Full landed-cost report for one SKU</li>
-              <li>All 5 countries included</li>
-              <li>CSV + narrative summary</li>
-              <li>Ideal for Amazon sellers &amp; smaller brands</li>
-            </ul>
-            <a class="btn btn-primary btn-full" href="https://buy.stripe.com/7sYaEXe2G4bM0PT6Mk3sI07" target="_blank" rel="noopener noreferrer">
-              Buy Starter Report
-            </a>
-          </article>
-
-          <article class="price-card card">
-            <h3>Pro Report</h3>
-            <p class="price-main">$89</p>
-            <p class="price-tagline">Deeper one-off sourcing report.</p>
-            <ul class="price-list">
-              <li>Everything in Starter</li>
-              <li>Expanded lane commentary</li>
-              <li>Suggested next steps &amp; scenarios</li>
-              <li>Great for sourcing / ops managers</li>
-            </ul>
-            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/3cI8wPcYC37I8ilc6E3sI08" target="_blank" rel="noopener noreferrer">
-              Buy Pro Report
-            </a>
-          </article>
-
-          <article class="price-card card">
-            <h3>Pro Monthly</h3>
-            <p class="price-main">$49<span>/month</span></p>
-            <p class="price-tagline">For recurring importers comparing multiple SKUs.</p>
-            <ul class="price-list">
-              <li>Up to 10 analyses per month</li>
-              <li>All countries + CSV exports</li>
-              <li>Priority email responses</li>
-              <li>Best for DTC &amp; marketplace brands</li>
-            </ul>
-            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/6oUdR93o26jU5694Ec3sI09" target="_blank" rel="noopener noreferrer">
-              Choose Pro Monthly
-            </a>
-          </article>
-
-          <article class="price-card card">
-            <h3>Business</h3>
-            <p class="price-main">$99<span>/month</span></p>
-            <p class="price-tagline">For small teams with regular import decisions.</p>
-            <ul class="price-list">
-              <li>Up to 30 analyses per month</li>
-              <li>CSV portfolio exports</li>
-              <li>Priority support</li>
-            </ul>
-            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/6oUdR9cYC23E8il8Us3sI0a" target="_blank" rel="noopener noreferrer">
-              Choose Business
-            </a>
-          </article>
-
-          <article class="price-card card">
-            <h3>Enterprise</h3>
-            <p class="price-main">$399<span>/month</span></p>
-            <p class="price-tagline">For ops-heavy orgs that live in sourcing decisions.</p>
-            <ul class="price-list">
-              <li>Unlimited analyses</li>
-              <li>Team access (via shared account)</li>
-              <li>API support (as available)</li>
-            </ul>
-            <a class="btn btn-outline btn-full" href="https://buy.stripe.com/5kQ6oH7Ei0ZA8ilgmU3sI0b" target="_blank" rel="noopener noreferrer">
-              Talk to sales / prepay
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
+    <!-- FAQ -->
     <section id="faq" class="faq-section">
       <div class="container">
         <h2>FAQ</h2>
         <div class="faq-grid">
           <div class="faq-item card">
-            <h3>Is this a customs or legal tool?</h3>
-            <p>No. SourcingLens is an analysis aid only. It helps you get directional clarity before you spend time and money on formal quotes or broker work.</p>
+            <h3>Is the free tool “enough”?</h3>
+            <p>
+              The free 1-vs-1 view is excellent for a quick sniff test. If you’re seriously considering a lane change,
+              Starter or Pro give you a more complete picture across five countries with HS-aware assumptions.
+            </p>
           </div>
           <div class="faq-item card">
             <h3>How accurate are HS suggestions?</h3>
-            <p>GPT-4.1-mini is very strong at pattern recognition, but HS classification is nuanced. Always confirm with your broker. Treat HS suggestions here as a starting point, not a final answer.</p>
+            <p>
+              GPT-4.1-mini is strong at pattern-matching, but HS classification is nuanced. Treat suggestions as a
+              starting point only and always confirm with your broker or trade counsel.
+            </p>
           </div>
           <div class="faq-item card">
-            <h3>Will you store my product details?</h3>
-            <p>This MVP is designed to be light touch. Avoid entering sensitive information. If you self-host, your own configuration controls what is logged.</p>
+            <h3>How do accounts work for Pro Monthly?</h3>
+            <p>
+              Pro Monthly uses Supabase for email + magic link sign-in and a simple <code>analyses</code> table to
+              store your runs. You can sign in from any browser where your Supabase project is configured.
+            </p>
           </div>
         </div>
       </div>
@@ -373,7 +613,7 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> SourcingLens. All rights reserved.</p>
+      <p>© <span id="year">2025</span> SourcingLens. All rights reserved.</p>
       <p class="footer-links">
         <a href="privacy.html">Privacy</a> •
         <a href="terms.html">Terms</a> •
@@ -382,6 +622,10 @@
     </div>
   </footer>
 
+  <!-- External libs for PDF & Supabase (used in JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="script.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
