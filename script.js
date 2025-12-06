@@ -1,4 +1,3 @@
-
 // SourcingLens client logic – shared between main site and results page
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +16,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Free tier
+  // Free tier - TWO STEP FLOW
+  const freeStep1Button = document.getElementById("freeStep1Button");
+  if (freeStep1Button) {
+    freeStep1Button.addEventListener("click", () => {
+      const category = document.getElementById("freeProductCategory")?.value;
+      const currentCountry = document.getElementById("freeCurrentCountry")?.value;
+      
+      if (!category || !currentCountry) {
+        alert("Please select both product category and current supplier country.");
+        return;
+      }
+      
+      // Hide step 1, show step 2
+      const step1 = document.getElementById("free-form-step1");
+      const step2 = document.getElementById("free-form-step2");
+      if (step1) step1.classList.add("hidden");
+      if (step2) step2.classList.remove("hidden");
+    });
+  }
+
   const freeRunButton = document.getElementById("freeRunButton");
   if (freeRunButton) freeRunButton.addEventListener("click", runFreeComparison);
 
@@ -157,7 +175,7 @@ function runFreeComparison() {
       <td>${formatCurrency(currentRes.shipping)}</td>
       <td>${formatCurrency(currentRes.totalUnit)}</td>
       <td>${formatCurrency(currentRes.annualCost)}</td>
-      <td>–</td>
+      <td>—</td>
     `;
 
     altRow.innerHTML = `
@@ -189,6 +207,11 @@ function runFreeComparison() {
   if (statusEl) {
     statusEl.textContent = "Comparison complete.";
     statusEl.className = "status-pill status-ok";
+  }
+
+  // Scroll to results
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
@@ -293,7 +316,7 @@ async function runStarterAnalysis() {
       <td>${formatCurrency(r.shipping)}</td>
       <td>${formatCurrency(r.totalUnit)}</td>
       <td>${formatCurrency(r.annualCost)}</td>
-      <td>${r.role === "current" ? "–" : deltaText}</td>
+      <td>${r.role === "current" ? "—" : deltaText}</td>
     `;
     tbody && tbody.appendChild(tr);
   });
