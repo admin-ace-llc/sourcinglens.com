@@ -15,7 +15,7 @@
           <span class="logo-mark">◎</span>
           <span class="logo-text">Sourcing<span>Lens</span></span>
         </a>
-        <p class="tagline">Directional sourcing math before you call a broker.</p>
+        <p class="tagline">Know your true costs before the next RFQ.</p>
       </div>
       <nav class="nav-links">
         <a class="nav-link" href="index.html#starter">Pricing</a>
@@ -27,21 +27,21 @@
   <main id="top">
     <section class="hero-section">
       <div class="container">
-        <div id="purchaseBanner" class="card" style="margin-bottom:1.1rem;">
-          <h1 style="margin:0 0 0.35rem;font-size:1.4rem;">You're all set – let's run your analysis</h1>
-          <p id="purchaseBannerText" class="hero-sub" style="margin:0;">
+        <div id="purchaseBanner" class="card" style="margin-bottom:1.1rem; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-left: 4px solid #10b981;">
+          <h1 style="margin:0 0 0.35rem;font-size:1.4rem; color: #065f46;">✓ You're all set – let's run your analysis</h1>
+          <p id="purchaseBannerText" class="hero-sub" style="margin:0; color: #047857;">
             Use the workspace below to generate your Starter or Pro report. You can always come back to this page from your email receipt.
           </p>
         </div>
 
         <p class="hero-sub">
-          This page hosts the same analysis engine shown on the main site, but without the marketing copy. If you purchased Starter, use the
+          This page hosts the same analysis engine shown on the main site. If you purchased Starter, use the
           Starter tab below for a single-SKU run. If you purchased Pro, switch to the Pro tab for a multi-SKU portfolio run.
         </p>
       </div>
     </section>
 
-    <!-- STARTER & PRO WORKSPACE (copied from main site) -->
+    <!-- STARTER & PRO WORKSPACE -->
     <section id="starter" class="paid-section">
       <div class="container">
         <h2>Starter &amp; Pro workspace</h2>
@@ -150,6 +150,15 @@
                       </table>
                     </div>
                   </div>
+
+                  <!-- UPSELL TO PRO -->
+                  <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); border-left: 4px solid #4f46e5;">
+                    <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #312e81;">💡 Need to analyze multiple products?</h3>
+                    <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: #4c1d95;">
+                      <strong>Pro ($89)</strong> lets you run up to 5 SKUs at once with portfolio-level insights and PDF reports.
+                    </p>
+                    <a href="index.html#starter" class="btn btn-outline">Upgrade to Pro →</a>
+                  </div>
                 </div>
                 <aside class="results-side">
                   <div class="card subtle">
@@ -159,6 +168,15 @@
                   <div class="card subtle">
                     <h3>Compliance &amp; risk notes</h3>
                     <p id="starter-compliance" class="side-text"></p>
+                  </div>
+                  <div class="card subtle">
+                    <h3>What's next?</h3>
+                    <ol class="side-list">
+                      <li>Download your CSV report</li>
+                      <li>Share with your customs broker</li>
+                      <li>Request quotes from suggested countries</li>
+                      <li>Consider <a href="index.html#pro-monthly">Pro Monthly</a> for ongoing analysis</li>
+                    </ol>
                   </div>
                 </aside>
               </div>
@@ -188,7 +206,7 @@
                 </div>
                 <div class="results-actions">
                   <button id="proDownloadCsvButton" class="btn btn-outline">Download portfolio CSV</button>
-                  <button id="proDownloadPdfButton" class="btn btn-outline">Download PDF pack (print view)</button>
+                  <button id="proDownloadPdfButton" class="btn btn-outline">Download PDF pack</button>
                 </div>
               </div>
               <div class="results-layout">
@@ -222,8 +240,17 @@
                     </div>
                     <div class="metric card">
                       <h3>Portfolio narrative</h3>
-                      <p id="pro-portfolio-summary" class="metric-main"></p>
+                      <p id="pro-portfolio-summary" class="metric-main side-text"></p>
                     </div>
+                  </div>
+
+                  <!-- UPSELL TO PRO MONTHLY -->
+                  <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 4px solid #f59e0b;">
+                    <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #78350f;">🚀 Running analyses regularly?</h3>
+                    <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: #92400e;">
+                      <strong>Pro Monthly ($149/mo)</strong> gives you unlimited analyses, team collaboration, and saved history.
+                    </p>
+                    <a href="index.html#pro-monthly" class="btn btn-primary">Learn About Pro Monthly →</a>
                   </div>
                 </div>
 
