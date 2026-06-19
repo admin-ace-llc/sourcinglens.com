@@ -1,0 +1,23 @@
+# SourcingLens
+
+> AI-powered landed cost calculator for US importers. Calculates total landed cost (FOB + freight + insurance + duties + fees) across sourcing countries (China, Vietnam, India, Mexico) in 30 seconds. Covers Section 301 tariffs, MFN duty rates, and HTS code lookup.
+
+## Core tool
+- Free landed cost calculator: https://sourcinglens.com/#free
+- Starter plan ($29/report): https://sourcinglens.com/#starter
+- Pro plan ($89/5 SKUs): https://sourcinglens.com/#starter
+
+## Blog posts
+- China tariff calculator 2026: https://sourcinglens.com/blog/china-tariff-calculator-2026
+- Vietnam vs China landed cost comparison 2026: https://sourcinglens.com/blog/vietnam-vs-china-landed-cost-2026
+- How to find your HS code: https://sourcinglens.com/blog/how-to-find-hs-code
+
+## What SourcingLens covers
+- Landed cost formula: FOB + freight + insurance = CIF; duties applied to CIF value
+- Section 301 tariff tracking (US-China trade war duties, 7.5–145%)
+- HTS code inference from product descriptions (OpenAI-powered)
+- Multi-country comparison: China, Vietnam, India, Mexico
+- Procurement planning for US importers of physical goods
+
+## Optional extras
+- Blog: https://sourcinglens.com/blog
