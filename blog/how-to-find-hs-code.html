@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>How to Find Your HS Code in 60 Seconds (2026 Guide) | SourcingLens</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Find your HTS/HS code fast without a customs broker. Step-by-step lookup guide for US importers, plus a free AI tool that classifies your product instantly." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://sourcinglens.com/blog/how-to-find-hs-code" />
+
+  <meta property="og:title" content="How to Find Your HS Code Without a Customs Broker (2026 Guide)" />
+  <meta property="og:description" content="HS code lookup doesn't require a customs broker. Here's the 60-second method most importers don't know about." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sourcinglens.com/blog/how-to-find-hs-code" />
+  <meta property="og:site_name" content="SourcingLens" />
+  <meta property="og:image" content="https://sourcinglens.com/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Find Your HS Code Without a Customs Broker (2026 Guide)",
+    "description": "Step-by-step guide to finding your HTS/HS code for US imports, including the USITC Schedule B tool, AI-assisted classification, and how to use the code to calculate your real landed cost.",
+    "author": { "@type": "Organization", "name": "SourcingLens", "url": "https://sourcinglens.com" },
+    "publisher": { "@type": "Organization", "name": "SourcingLens", "url": "https://sourcinglens.com" },
+    "datePublished": "2026-06-12",
+    "dateModified": "2026-06-19",
+    "url": "https://sourcinglens.com/blog/how-to-find-hs-code",
+    "keywords": "hs code lookup, how to find hs code, hts code, customs classification, schedule b, tariff code"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an HS code and why does it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An HS (Harmonized System) code is a 6-digit international product classification number. For US imports, this is extended to 10 digits and called an HTS code (Harmonized Tariff Schedule). Your HS code determines your import duty rate, any additional tariffs (like Section 301 duties on Chinese goods), and your compliance obligations. Getting it wrong means paying the wrong duty rate — sometimes too much, sometimes too little (the latter can trigger penalties and back-duty assessments)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I look up my HS code for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official source is the USITC HTS Search at hts.usitc.gov. Type keywords describing your product, browse the chapter structure, and look for the 10-digit HTS code that matches your product's material, function, and use. For a faster start, AI tools like SourcingLens can classify your product by description and return the likely HTS code in seconds."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between an HS code, HTS code, and Schedule B code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HS code (6 digits): the international base classification used worldwide. HTS code (10 digits): the US-specific extension used for imports. Schedule B code (10 digits): the US export classification system, structured similarly to HTS but used for exports. If you're importing into the US, you need the HTS code. If you're exporting from the US, you need the Schedule B code."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use my supplier's HS code for US import?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not directly. Your supplier's HS code is based on their country's tariff schedule. The structure is the same for the first 6 digits (all countries use the same HS framework up to Chapter/Heading/Subheading), but digits 7–10 differ by country. For US imports, you must use the US HTS code, which you can look up at hts.usitc.gov. The first 6 digits will likely match your supplier's code, which is a useful cross-check."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if I use the wrong HS code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Using the wrong HTS code can result in: (1) underpaying duties, which triggers Customs audit, back-duty assessment, and potential penalties; (2) overpaying duties, which costs you money you don't owe; (3) missing trade preference programs (like USMCA zero-duty treatment) that you were entitled to. If you're unsure, consult a licensed customs broker or request a binding ruling from CBP (Customs and Border Protection)."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .blog-hero { background: linear-gradient(135deg, #1e1b4b, #312e81); color: white; padding: 3rem 0 2.5rem; }
+    .blog-hero h1 { color: white; font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.2; margin: 0 0 0.8rem; }
+    .blog-meta { font-size: 0.82rem; color: #a5b4fc; margin: 0 0 0.5rem; }
+    .blog-intro { font-size: 1rem; color: #c7d2fe; margin: 0; line-height: 1.6; max-width: 680px; }
+    .blog-body { padding: 2.5rem 0 3rem; }
+    .blog-content { max-width: 760px; }
+    .blog-content h2 { font-size: 1.35rem; margin: 2rem 0 0.75rem; color: #111827; }
+    .blog-content h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; color: #1f2937; }
+    .blog-content p { font-size: 0.95rem; color: #374151; line-height: 1.75; margin: 0 0 1rem; }
+    .blog-content ul, .blog-content ol { padding-left: 1.4rem; margin: 0 0 1rem; }
+    .blog-content li { font-size: 0.95rem; color: #374151; line-height: 1.7; margin-bottom: 0.4rem; }
+    .blog-content a { color: #4f46e5; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.88rem; }
+    .data-table th { background: #f1f5f9; padding: 0.6rem 0.9rem; text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: #64748b; border-bottom: 2px solid #e2e8f0; }
+    .data-table td { padding: 0.55rem 0.9rem; border-bottom: 1px solid #f1f5f9; color: #374151; vertical-align: top; }
+    .data-table tr:nth-child(even) td { background: #f9fafb; }
+    .callout { background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-left: 4px solid #6366f1; padding: 1rem 1.25rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+    .callout p { margin: 0; font-size: 0.9rem; color: #312e81; }
+    .callout strong { color: #1e1b4b; }
+    .callout-warn { background: linear-gradient(135deg, #fff7ed, #ffedd5); border-left: 4px solid #f97316; }
+    .callout-warn p { color: #7c2d12; }
+    .callout-warn strong { color: #431407; }
+    .step-box { border: 1px solid #e0e7ff; border-radius: 12px; padding: 1.1rem 1.25rem; margin: 0.75rem 0; }
+    .step-box .step-num { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: #4f46e5; font-weight: 700; margin: 0 0 0.3rem; }
+    .step-box h4 { margin: 0 0 0.4rem; font-size: 1rem; color: #1f2937; }
+    .step-box p { margin: 0; font-size: 0.9rem; color: #4b5563; }
+    .cta-block { background: linear-gradient(135deg, #eef2ff, #e0e7ff); border-radius: 16px; padding: 1.75rem 2rem; margin: 2rem 0; text-align: center; }
+    .cta-block h3 { margin: 0 0 0.5rem; color: #312e81; }
+    .cta-block p { margin: 0 0 1rem; color: #4b5563; font-size: 0.9rem; }
+    .hs-anatomy { background: #f8fafc; border-radius: 12px; padding: 1.25rem; margin: 1rem 0 1.5rem; font-family: 'Courier New', monospace; }
+    .hs-anatomy .code-row { display: flex; gap: 0; font-size: 1.3rem; font-weight: 700; color: #1e1b4b; margin-bottom: 0.75rem; }
+    .hs-seg { padding: 0.4rem 0.6rem; border-radius: 6px; }
+    .seg-chapter { background: #dbeafe; color: #1e40af; }
+    .seg-heading { background: #dcfce7; color: #14532d; }
+    .seg-subheading { background: #fef9c3; color: #713f12; }
+    .seg-us1 { background: #fce7f3; color: #831843; }
+    .seg-us2 { background: #f3e8ff; color: #581c87; }
+    .seg-dot { padding: 0.4rem 0.1rem; color: #9ca3af; }
+    .hs-legend { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.78rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.35rem; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+    .blog-nav { border-top: 1px solid #e5e7eb; padding-top: 1.5rem; margin-top: 2rem; }
+    .blog-nav a { color: #4f46e5; font-size: 0.9rem; }
+  </style>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GC2PCY5GQ9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GC2PCY5GQ9');
+  </script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand-block">
+        <a href="/" class="logo-link" aria-label="SourcingLens home">
+          <span class="logo-mark">◎</span>
+          <span class="logo-text">Sourcing<span>Lens</span></span>
+        </a>
+        <p class="tagline">Know your true costs before the next RFQ.</p>
+      </div>
+      <nav class="nav-links">
+        <a class="nav-link" href="/#free">Free Tool</a>
+        <a class="nav-link" href="/#starter">Pricing</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/guides">Guides</a>
+        <a class="nav-link nav-cta" href="/#free" style="background: radial-gradient(circle at 0% 0%, #a5b4fc, #4f46e5); color: white !important; border-radius: 999px; padding: 0.4rem 1rem !important; font-weight: 600;">Try Free →</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="blog-hero">
+    <div class="container">
+      <p class="blog-meta">SourcingLens · Tariff Basics · Updated June 2026</p>
+      <h1>How to Find Your HS Code Without a Customs Broker (2026 Guide)</h1>
+      <p class="blog-intro">Your HS code determines your tariff rate. Getting it wrong can mean overpaying duties for years — or triggering a Customs audit. Here's how to look it up correctly in about 60 seconds.</p>
+    </div>
+  </div>
+
+  <main class="blog-body">
+    <div class="container">
+      <div class="blog-content">
+
+        <p>Every product imported into the United States is assigned a 10-digit Harmonized Tariff Schedule (HTS) code. That code controls everything: what duty rate you pay, whether Section 301 tariffs apply, whether you qualify for trade agreement preferences like USMCA, and what CBP is looking for when your shipment arrives at the port.</p>
+        <p>Most importers either ask their supplier for the code (unreliable — your supplier uses their country's classification, which differs after the first 6 digits) or pay a customs broker every time (fine for complex products, overkill for straightforward ones). Here's how to do it yourself.</p>
+
+        <h2>First: understand what an HS code actually is</h2>
+        <p>The HS code has a hierarchy. Each level narrows down the classification:</p>
+
+        <div class="hs-anatomy">
+          <div class="code-row">
+            <span class="hs-seg seg-chapter">85</span>
+            <span class="hs-seg seg-heading">23</span>
+            <span class="hs-seg seg-subheading">90</span>
+            <span class="hs-seg seg-dot">.</span>
+            <span class="hs-seg seg-us1">40</span>
+            <span class="hs-seg seg-us2">00</span>
+          </div>
+          <div class="hs-legend">
+            <div class="legend-item"><div class="legend-dot" style="background: #dbeafe;"></div> <span>Chapter (2 digits) — broad category: "Electrical machinery"</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background: #dcfce7;"></div> <span>Heading (4 digits) — product type: "Monitors and displays"</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background: #fef9c3;"></div> <span>Subheading (6 digits) — international standard breakout</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background: #fce7f3;"></div> <span>US statistical suffix (digits 7–8) — US-specific split</span></div>
+            <div class="legend-item"><div class="legend-dot" style="background: #f3e8ff;"></div> <span>US statistical suffix (digits 9–10) — further US detail</span></div>
+          </div>
+        </div>
+
+        <p>The first 6 digits are the same worldwide. Your Chinese supplier's 6-digit code should match the US HTS code at the same level — useful as a cross-check, but don't rely on digits 7–10 from your supplier.</p>
+
+        <h2>The 60-second method: USITC HTS Search</h2>
+        <p>The official US lookup tool is <strong>hts.usitc.gov</strong>. It's free, official, and searchable. Here's the fastest path:</p>
+
+        <div class="step-box">
+          <p class="step-num">Step 1</p>
+          <h4>Go to hts.usitc.gov and search your product</h4>
+          <p>Type 2–4 descriptive words about your product. Be specific about material and function. "Bluetooth speaker" is better than "electronics." "Polyester fleece jacket, men's" is better than "jacket."</p>
+        </div>
+
+        <div class="step-box">
+          <p class="step-num">Step 2</p>
+          <h4>Browse the results and check Chapter notes</h4>
+          <p>USITC returns candidate headings. Click through to the Chapter and read the Chapter Notes — these are legally binding definitions that often override common-sense product names. A "case for smartphones" might classify under Chapter 42 (leather goods) rather than Chapter 85 (electronics), depending on material.</p>
+        </div>
+
+        <div class="step-box">
+          <p class="step-num">Step 3</p>
+          <h4>Find the 10-digit HTS code and confirm the duty rate</h4>
+          <p>The full 10-digit code will show the general duty rate, any applicable Section 232 or Section 301 tariffs, and trade agreement columns (USMCA, etc.). Confirm the description matches your product precisely — "woven" vs "knit" matters, "AC" vs "DC" motors matter, made of plastic vs rubber matters.</p>
+        </div>
+
+        <div class="step-box">
+          <p class="step-num">Step 4</p>
+          <h4>Cross-check with your supplier's code</h4>
+          <p>Ask your supplier for their HS code. Compare the first 6 digits to your US HTS code. They should match. If they don't, one of you has a classification issue — or your product genuinely classifies differently in each country's extended system, which is possible but uncommon.</p>
+        </div>
+
+        <div class="callout">
+          <p><strong>Shortcut:</strong> SourcingLens's free tool will infer your likely HTS code from a plain-English product description. You paste in "Wireless earbuds with charging case, plastic housing" and it returns candidate codes with duty rates and Section 301 applicability. It's faster than the USITC tool for standard products — and it immediately shows you the landed cost impact.</p>
+        </div>
+
+        <h2>Common classification mistakes that cost importers money</h2>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Product</th><th>Common wrong classification</th><th>Correct classification</th><th>Duty difference</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Laptop bag (nylon)</td>
+              <td>Chapter 42 (leather goods) — 4.5%</td>
+              <td>Chapter 62 (travel goods) or 42 depending on construction — 17.6% possible</td>
+              <td>Up to 13 points</td>
+            </tr>
+            <tr>
+              <td>USB-C cable</td>
+              <td>Chapter 85 (electrical wire) — 0%</td>
+              <td>Usually 8544.42 (insulated wire) — also 0%, but check Section 301</td>
+              <td>25% if misclassified under components list</td>
+            </tr>
+            <tr>
+              <td>Stainless steel water bottle</td>
+              <td>Chapter 73 (articles of iron/steel) — 2%</td>
+              <td>7323.93 (table/kitchen articles) — 2%, but Section 301 applies from China</td>
+              <td>Section 301 missed = 25% underpaid</td>
+            </tr>
+            <tr>
+              <td>LED light fixture (commercial)</td>
+              <td>9405.49 (lamps) — 3.9%</td>
+              <td>8543.70 (electrical apparatus) — 0%, but Section 301 may apply</td>
+              <td>3.9% overpaid if misclassified</td>
+            </tr>
+            <tr>
+              <td>Textile face mask (non-medical)</td>
+              <td>Chapter 63 (other textile articles) — 7%</td>
+              <td>6307.90 (other made-up articles) — 7%; medical masks use 6307.90 at 0%</td>
+              <td>Critical if medical-grade claims involved</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout callout-warn">
+          <p><strong>The most common expensive mistake:</strong> failing to apply Section 301 tariffs to Chinese imports. Your MFN base duty rate might be 0–3%, but if your product is subject to a Section 301 action (most are), another 7.5–25% applies on top. Many small importers only see the base rate and assume that's the full duty. The USITC table shows both — make sure you're looking at the combined rate.</p>
+        </div>
+
+        <h2>HS code lookup by product category</h2>
+        <p>Not sure which chapter to start in? Use this as a quick orientation:</p>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Product category</th><th>HS Chapter(s)</th><th>Key classification question</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Electronics, devices</td><td>84, 85</td><td>Does it process data (Ch. 84) or is it primarily electrical (Ch. 85)?</td></tr>
+            <tr><td>Apparel, clothing</td><td>61, 62</td><td>Knit fabric (Ch. 61) or woven/other (Ch. 62)?</td></tr>
+            <tr><td>Footwear</td><td>64</td><td>Upper material: leather, rubber, textile?</td></tr>
+            <tr><td>Furniture, lighting</td><td>94</td><td>Function and material; lighting type</td></tr>
+            <tr><td>Plastic articles</td><td>39</td><td>Primary use and specific product type</td></tr>
+            <tr><td>Metal articles (steel)</td><td>73</td><td>Form: wire, rod, tube, finished article?</td></tr>
+            <tr><td>Toys, games</td><td>95</td><td>Is it primarily a toy, or does it have another primary function?</td></tr>
+            <tr><td>Cosmetics, personal care</td><td>33</td><td>Composition and intended application</td></tr>
+            <tr><td>Food products</td><td>1–24</td><td>Specific ingredient and preparation method</td></tr>
+            <tr><td>Automotive parts</td><td>87</td><td>OEM vs aftermarket; specific component type</td></tr>
+          </tbody>
+        </table>
+
+        <h2>When to get a binding ruling from CBP</h2>
+        <p>If your product is genuinely ambiguous, or if the duty difference between two possible classifications is large enough to matter at scale, request a <strong>Binding Ruling</strong> from US Customs and Border Protection (cbp.gov/trade). A binding ruling is CBP's official written determination of your product's correct HTS classification. It's legally binding on CBP and protects you from duty reclassification on future shipments of the same product.</p>
+        <p>Binding rulings are free and typically take 30–60 days. They're worth requesting if: your annual import value is $200K+, the classification is contested or non-obvious, or if you're making a significant sourcing decision based on the duty rate.</p>
+
+        <div class="cta-block">
+          <h3>Get your HS code and landed cost in 60 seconds</h3>
+          <p>Paste your product description and SourcingLens will infer the likely HTS code, flag any Section 301 exposure, and calculate your full landed cost. Free, no login required.</p>
+          <a href="/#free" class="btn btn-primary btn-large">Find My HS Code Free →</a>
+          <p style="margin: 0.5rem 0 0; font-size: 0.8rem; color: #6b7280;">Starter ($29) locks in a specific HTS code with full citation. Pro ($89) runs 5 SKUs at once with a consolidated duty summary.</p>
+        </div>
+
+        <h2>Frequently asked questions</h2>
+
+        <h3>What is an HS code and why does it matter?</h3>
+        <p>An HS (Harmonized System) code is a 6-digit international product classification number. For US imports, this extends to 10 digits as an HTS code. Your code determines your import duty rate, any additional tariffs (like Section 301 duties on Chinese goods), and your compliance obligations. Wrong code = wrong duty rate — either over- or underpaid, both of which create problems.</p>
+
+        <h3>Where can I look up my HS code for free?</h3>
+        <p>The official source is <strong>hts.usitc.gov</strong>. Type keywords about your product, browse the chapter structure, and confirm your code at the 10-digit level. SourcingLens also offers AI-assisted classification via our free landed cost tool — paste a product description and it returns candidate HTS codes with duty rates.</p>
+
+        <h3>What's the difference between HS, HTS, and Schedule B?</h3>
+        <p>HS code (6 digits): the international standard used worldwide. HTS code (10 digits): US-specific extension for imports. Schedule B (10 digits): US export classification. If you're importing into the US, you need the HTS code.</p>
+
+        <h3>Can I use my supplier's HS code?</h3>
+        <p>Only as a starting point. Your supplier's code uses their country's extended digits (7–10), which differ from the US HTS. The first 6 digits should match — use those to cross-check. Never copy digits 7–10 from a supplier's commercial invoice as your US HTS code.</p>
+
+        <h3>What happens if I use the wrong HS code?</h3>
+        <p>Underpaying duties triggers Customs audit, back-duty assessment, and potential penalties up to 4x the unpaid duty. Overpaying means you've lost real money for every shipment. If you're genuinely uncertain, consult a licensed customs broker or request a binding ruling from CBP — it's free and legally protects you.</p>
+
+        <div class="blog-nav">
+          <p>← <a href="/blog/vietnam-vs-china-landed-cost-2026">Vietnam vs China Landed Cost Comparison</a> &nbsp;|&nbsp; <a href="/blog/china-tariff-calculator-2026">China Tariff Calculator 2026 →</a></p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 1rem 0;">
+      <div>
+        <span class="logo-mark">◎</span>
+        <span class="logo-text" style="font-weight: 700; margin-left: 0.4rem;">Sourcing<span style="color: #4f46e5;">Lens</span></span>
+        <p style="font-size: 0.78rem; color: #9ca3af; margin: 0.2rem 0 0;">AI-powered landed cost calculator for US importers.</p>
+      </div>
+      <p style="font-size: 0.78rem; color: #9ca3af; margin: 0;">
+        © 2026 SourcingLens. Indicative analysis only — validate with your customs broker.
+        <a href="/privacy" style="color: #9ca3af;">Privacy</a> · <a href="/terms" style="color: #9ca3af;">Terms</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
