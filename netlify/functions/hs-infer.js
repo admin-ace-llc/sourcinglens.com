@@ -19,11 +19,11 @@ export default async function handler(event, context) {
     };
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "OPENAI_API_KEY not configured" })
+      body: JSON.stringify({ error: "ANTHROPIC_API_KEY not configured" })
     };
   }
 
@@ -32,44 +32,35 @@ export default async function handler(event, context) {
     const productName = body.productName || "";
     const description = body.description || "";
 
-    const prompt = `You are assisting with indicative HS classification (6-digit level). 
-Product name: ${productName}
-Description: ${description}
-
-Respond with a short JSON object ONLY, no commentary, of the form:
-{{"hsCode":"NNNNNN","reason":"very short explanation"}}. 
-If you are unsure, use "000000".`;
-
-    const resp = await fetch("https://api.openai.com/v1/responses", {
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer " + apiKey,
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
-        input: prompt,
-        response_format: { type: "text" },
-        max_output_tokens: 150
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 150,
+        system: "You are an expert in HS/HTS tariff classification. Respond only with a JSON object — no markdown, no commentary, no code fences.",
+        messages: [{
+          role: "user",
+          content: `Classify this product at the 6-digit HS level.\nProduct: ${productName}\nDescription: ${description}\n\nRespond with exactly this JSON and nothing else: {"hsCode":"NNNNNN","reason":"brief explanation"}. If unsure, use "000000".`
+        }]
       })
     });
 
     if (!resp.ok) {
       const txt = await resp.text();
-      console.error("OpenAI error:", txt);
+      console.error("Anthropic error:", txt);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: "OpenAI API error" })
+        body: JSON.stringify({ error: "Anthropic API error" })
       };
     }
 
     const data = await resp.json();
-    // Responses API: output_text is a convenience string; fallback to output array content
-    const raw = data.output_text
-      || data.output?.[0]?.content?.[0]?.text
-      || data.choices?.[0]?.message?.content
-      || "";
-    // Strip markdown code fences if the model wraps the JSON
+    const raw = data.content?.[0]?.text || "";
     const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/```$/i, "").trim();
     let hsCode = "";
     let reason = "";
@@ -78,7 +69,6 @@ If you are unsure, use "000000".`;
       hsCode = parsed.hsCode || "";
       reason = parsed.reason || "";
     } catch (e) {
-      // Try extracting a 6-digit code from the raw text as a last resort
       const match = cleaned.match(/\b(\d{6})\b/);
       hsCode = match ? match[1] : "000000";
       reason = "Parsing error – treat as unknown.";
