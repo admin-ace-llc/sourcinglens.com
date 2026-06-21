@@ -2,293 +2,446 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SourcingLens – Your Analysis Workspace</title>
+  <title>SourcingLens – Analysis Workspace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Run your purchased SourcingLens Starter or Pro landed-cost analysis here." />
+  <meta name="description" content="Run your SourcingLens landed-cost analysis." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="header">
     <div class="container header-inner">
       <div class="brand-block">
-        <a href="index.html#top" class="logo-link" aria-label="SourcingLens home">
+        <a href="/" class="logo-link" aria-label="SourcingLens home">
           <span class="logo-mark">◎</span>
           <span class="logo-text">Sourcing<span>Lens</span></span>
         </a>
         <p class="tagline">Know your true costs before the next RFQ.</p>
       </div>
       <nav class="nav-links">
-        <a class="nav-link" href="index.html#starter">Pricing</a>
-        <a class="nav-link" href="index.html#how-it-works">How it works</a>
+        <a class="nav-link" href="/#starter">Pricing</a>
+        <a class="nav-link" href="/#how-it-works">How it works</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero-section">
+
+    <!-- Purchase confirmation banner – updated by JS -->
+    <section class="hero-section" style="padding-bottom: 0;">
       <div class="container">
-        <div id="purchaseBanner" class="card" style="margin-bottom:1.1rem; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-left: 4px solid #10b981;">
-          <h1 style="margin:0 0 0.35rem;font-size:1.4rem; color: #065f46;">✓ You're all set – let's run your analysis</h1>
-          <p id="purchaseBannerText" class="hero-sub" style="margin:0; color: #047857;">
-            Use the workspace below to generate your Starter or Pro report. You can always come back to this page from your email receipt.
+        <div id="purchaseBanner" class="card" style="margin-bottom: 1.1rem; background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-left: 4px solid #10b981;">
+          <h1 style="margin: 0 0 0.35rem; font-size: 1.4rem; color: #065f46;">✓ You're all set – let's run your analysis</h1>
+          <p id="purchaseBannerText" class="hero-sub" style="margin: 0; color: #047857;">
+            Use the workspace below to run your analysis.
           </p>
         </div>
-
-        <p class="hero-sub">
-          This page hosts the same analysis engine shown on the main site. If you purchased Starter, use the
-          Starter tab below for a single-SKU run. If you purchased Pro, switch to the Pro tab for a multi-SKU portfolio run.
-        </p>
       </div>
     </section>
 
-    <!-- STARTER & PRO WORKSPACE -->
-    <section id="starter" class="paid-section">
+    <!-- ═══════════════════════════════════════
+         STARTER – 1 SKU
+    ════════════════════════════════════════ -->
+    <section id="plan-starter" class="paid-section hidden">
       <div class="container">
-        <h2>Starter &amp; Pro workspace</h2>
-        <p class="pricing-intro">
-          Starter is for one SKU. Pro scales to up to five SKUs in a single run, with richer narrative and risk insights. Both tiers unlock
-          AI-powered HS suggestions and 5-country comparison.
-        </p>
+        <div style="margin-bottom: 1rem;">
+          <h2 style="margin: 0 0 0.25rem;">Starter Analysis</h2>
+          <p class="pricing-intro" style="margin: 0;">Enter one product below. AI suggests the HS code; you get a 5-country landed-cost comparison and a downloadable CSV.</p>
+        </div>
 
         <div class="card starter-demo-card">
-          <div class="tabs">
-            <button class="tab-button active" data-tab="starter-tab">Starter – 1 SKU</button>
-            <button class="tab-button" data-tab="pro-tab">Pro – up to 5 SKUs</button>
-          </div>
+          <form id="starter-form" novalidate onsubmit="return false;">
+            <label>
+              Product name
+              <input type="text" id="starterProductName" required placeholder="e.g. Stainless steel water bottle 500ml" />
+            </label>
+            <label>
+              Product description
+              <textarea id="starterProductDescription" rows="2" placeholder="Key materials, use, coatings, electronics, certifications, etc." required></textarea>
+            </label>
+            <label>
+              HS code <span style="font-weight:400; color:#6b7280;">(optional – leave blank for AI suggestion)</span>
+              <input type="text" id="starterHsCode" placeholder="e.g. 732393" />
+            </label>
 
-          <div id="starter-tab" class="tab-panel active">
-            <form id="starter-form" novalidate onsubmit="return false;">
+            <div class="grid-2">
               <label>
-                Product name
-                <input type="text" id="starterProductName" required />
+                Current supplier country
+                <select id="starterCurrentCountry" required>
+                  <option value="">Select...</option>
+                  <option value="china">China</option>
+                  <option value="vietnam">Vietnam</option>
+                  <option value="mexico">Mexico</option>
+                  <option value="india">India</option>
+                  <option value="usa">United States</option>
+                </select>
               </label>
               <label>
-                Product description
-                <textarea id="starterProductDescription" rows="2" placeholder="Key materials, use, coatings, electronics, etc." required></textarea>
+                Current unit cost (USD)
+                <input type="number" id="starterUnitCost" min="0" step="0.01" required placeholder="e.g. 8.50" />
               </label>
-              <label>
-                HS code (optional – leave blank for AI suggestion)
-                <input type="text" id="starterHsCode" placeholder="e.g. 732393" />
-              </label>
-
-              <div class="grid-2">
-                <label>
-                  Current supplier country
-                  <select id="starterCurrentCountry" required>
-                    <option value="">Select...</option>
-                    <option value="china">China</option>
-                    <option value="vietnam">Vietnam</option>
-                    <option value="mexico">Mexico</option>
-                    <option value="india">India</option>
-                    <option value="usa">United States</option>
-                  </select>
-                </label>
-                <label>
-                  Current unit cost (USD)
-                  <input type="number" id="starterUnitCost" min="0" step="0.01" required />
-                </label>
-              </div>
-
-              <div class="grid-2">
-                <label>
-                  Annual volume (units)
-                  <input type="number" id="starterAnnualVolume" min="1" step="1" required />
-                </label>
-                <label>
-                  Priority
-                  <select id="starterPriority">
-                    <option value="cost">Lowest cost</option>
-                    <option value="balance">Balance cost &amp; risk</option>
-                    <option value="nearshore">Nearshoring / USMCA</option>
-                    <option value="us">US / local preference</option>
-                  </select>
-                </label>
-              </div>
-
-              <div class="status-row">
-                <span id="starterHsStatus" class="status-pill status-idle">HS code: using your input</span>
-                <span id="starterStatus" class="status-pill status-idle">Ready to run</span>
-              </div>
-
-              <button type="button" class="btn btn-primary btn-full" id="starterRunButton">
-                Run Starter analysis
-              </button>
-              <p class="disclaimer">
-                HS suggestions are AI-generated and indicative only. Always confirm with your broker.
-              </p>
-            </form>
-
-            <div id="starter-results-section" class="results-section nested hidden">
-              <div class="results-header">
-                <div>
-                  <h3>Starter results for <span id="starter-results-product-name"></span></h3>
-                  <p id="starter-results-intro" class="results-intro"></p>
-                </div>
-                <button id="starterDownloadCsvButton" class="btn btn-outline">Download CSV</button>
-              </div>
-              <div class="results-layout">
-                <div class="results-main">
-                  <div class="table-card card">
-                    <div class="table-caption-row">
-                      <p class="caption-title">5-country comparison</p>
-                      <p class="caption-note">Directional view based on your inputs and simplified heuristics.</p>
-                    </div>
-                    <div class="table-wrapper">
-                      <table id="starter-results-table">
-                        <thead>
-                          <tr>
-                            <th>Option</th>
-                            <th>Unit base</th>
-                            <th>Tariff</th>
-                            <th>Shipping</th>
-                            <th>Total landed</th>
-                            <th>Annual cost</th>
-                            <th>vs current</th>
-                          </tr>
-                        </thead>
-                        <tbody></tbody>
-                      </table>
-                    </div>
-                  </div>
-
-                  <!-- UPSELL TO PRO -->
-                  <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); border-left: 4px solid #4f46e5;">
-                    <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #312e81;">💡 Need to analyze multiple products?</h3>
-                    <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: #4c1d95;">
-                      <strong>Pro ($49)</strong> lets you run up to 5 SKUs at once with portfolio-level insights and PDF reports.
-                    </p>
-                    <a href="index.html#starter" class="btn btn-outline">Upgrade to Pro →</a>
-                  </div>
-                </div>
-                <aside class="results-side">
-                  <div class="card subtle">
-                    <h3>Narrative summary</h3>
-                    <p id="starter-summary" class="side-text"></p>
-                  </div>
-                  <div class="card subtle">
-                    <h3>Compliance &amp; risk notes</h3>
-                    <p id="starter-compliance" class="side-text"></p>
-                  </div>
-                  <div class="card subtle">
-                    <h3>What's next?</h3>
-                    <ol class="side-list">
-                      <li>Download your CSV report</li>
-                      <li>Share with your customs broker</li>
-                      <li>Request quotes from suggested countries</li>
-                      <li>Consider <a href="index.html#pro-monthly">Pro Monthly</a> for ongoing analysis</li>
-                    </ol>
-                  </div>
-                </aside>
-              </div>
             </div>
-          </div>
 
-          <div id="pro-tab" class="tab-panel">
-            <p class="side-text">
-              Pro lets you run up to five SKUs at once. Add up to five product rows, then run the multi-SKU engine to see aggregated results.
-            </p>
-            <form id="pro-form" novalidate onsubmit="return false;">
-              <div id="pro-sku-container"></div>
-              <button type="button" class="btn btn-ghost" id="proAddSkuButton">+ Add SKU</button>
-              <div class="status-row">
-                <span id="proStatus" class="status-pill status-idle">Ready to run (0 SKUs added, max 5)</span>
+            <div class="grid-2">
+              <label>
+                Annual volume (units)
+                <input type="number" id="starterAnnualVolume" min="1" step="1" required placeholder="e.g. 10000" />
+              </label>
+              <label>
+                Priority
+                <select id="starterPriority">
+                  <option value="cost">Lowest cost</option>
+                  <option value="balance">Balance cost &amp; risk</option>
+                  <option value="nearshore">Nearshoring / USMCA</option>
+                  <option value="us">US / local preference</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="status-row">
+              <span id="starterHsStatus" class="status-pill status-idle">HS code: using your input</span>
+              <span id="starterStatus" class="status-pill status-idle">Ready to run</span>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-full" id="starterRunButton">
+              Run Starter analysis →
+            </button>
+            <p class="disclaimer">HS suggestions are AI-generated and indicative only. Always confirm with your broker.</p>
+          </form>
+
+          <div id="starter-results-section" class="results-section nested hidden">
+            <div class="results-header">
+              <div>
+                <h3>Results for <span id="starter-results-product-name"></span></h3>
+                <p id="starter-results-intro" class="results-intro"></p>
               </div>
-              <button type="button" class="btn btn-primary btn-full" id="proRunButton">
-                Run Pro analysis (up to 5 SKUs)
-              </button>
-            </form>
+              <button id="starterDownloadCsvButton" class="btn btn-outline">Download CSV</button>
+            </div>
 
-            <div id="pro-results-section" class="results-section nested hidden">
-              <div class="results-header">
-                <div>
-                  <h3>Pro results (portfolio)</h3>
-                  <p id="pro-results-intro" class="results-intro"></p>
-                </div>
-                <div class="results-actions">
-                  <button id="proDownloadCsvButton" class="btn btn-outline">Download portfolio CSV</button>
-                  <button id="proDownloadPdfButton" class="btn btn-outline">Download PDF pack</button>
-                </div>
-              </div>
-              <div class="results-layout">
-                <div class="results-main">
-                  <div class="table-card card">
-                    <div class="table-caption-row">
-                      <p class="caption-title">SKU-by-SKU summary</p>
-                      <p class="caption-note">Highlights where savings may justify a sourcing project.</p>
-                    </div>
-                    <div class="table-wrapper">
-                      <table id="pro-results-table">
-                        <thead>
-                          <tr>
-                            <th>SKU</th>
-                            <th>Suggested lane</th>
-                            <th>Annual cost current</th>
-                            <th>Annual cost suggested</th>
-                            <th>Annual savings</th>
-                          </tr>
-                        </thead>
-                        <tbody></tbody>
-                      </table>
-                    </div>
+            <div class="results-layout">
+              <div class="results-main">
+                <div class="table-card card">
+                  <div class="table-caption-row">
+                    <p class="caption-title">5-country landed cost comparison</p>
+                    <p class="caption-note">Based on 2026 tariff heuristics. ★ = recommended lane.</p>
                   </div>
-
-                  <div class="metrics-grid">
-                    <div class="metric card">
-                      <h3>Total estimated annual savings</h3>
-                      <p id="pro-total-savings" class="metric-main"></p>
-                      <p class="metric-note">Sum of positive savings across all SKUs.</p>
-                    </div>
-                    <div class="metric card">
-                      <h3>Portfolio narrative</h3>
-                      <p id="pro-portfolio-summary" class="metric-main side-text"></p>
-                    </div>
-                  </div>
-
-                  <!-- UPSELL TO PRO MONTHLY -->
-                  <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 4px solid #f59e0b;">
-                    <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #78350f;">🚀 Running analyses regularly?</h3>
-                    <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: #92400e;">
-                      <strong>Pro Monthly ($49/mo)</strong> gives you unlimited analyses, team collaboration, and saved history.
-                    </p>
-                    <a href="index.html#pro-monthly" class="btn btn-primary">Learn About Pro Monthly →</a>
+                  <div class="table-wrapper">
+                    <table id="starter-results-table">
+                      <thead>
+                        <tr>
+                          <th>Option</th>
+                          <th>Unit base</th>
+                          <th>Tariff</th>
+                          <th>Shipping</th>
+                          <th>Total landed</th>
+                          <th>Annual cost</th>
+                          <th>vs current</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
                   </div>
                 </div>
 
-                <aside class="results-side">
-                  <div class="card subtle">
-                    <h3>Risk drivers panel</h3>
-                    <p id="pro-risk-panel" class="side-text"></p>
-                  </div>
-                  <div class="card subtle">
-                    <h3>Top 3 next steps</h3>
-                    <ul id="pro-next-steps" class="side-list"></ul>
-                  </div>
-                  <div class="card subtle">
-                    <h3>Save to Pro Monthly</h3>
-                    <p class="side-text">
-                      If you're logged in via Pro Monthly, you can save this run to your dashboard.
-                    </p>
-                    <button type="button" class="btn btn-outline btn-full" id="proSaveToDashboardButton">
-                      Save latest Pro run to dashboard
-                    </button>
-                    <p id="dashboardSaveStatus" class="hint"></p>
-                  </div>
-                </aside>
+                <!-- Upsell to Pro Monthly -->
+                <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, #1e1b4b, #312e81); border: none;">
+                  <p style="margin: 0 0 0.2rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #a5b4fc;">Run more analyses?</p>
+                  <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #fff;">Pro Monthly – bulk CSV upload, up to 100 SKUs per run</h3>
+                  <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: #c7d2fe; line-height: 1.5;">
+                    Upload a spreadsheet of your entire product range and get a full portfolio analysis in one go. Unlimited runs per month.
+                  </p>
+                  <a href="/#starter" class="btn btn-primary" style="background: #6366f1; border-color: #6366f1;">Upgrade to Pro Monthly – $49/mo →</a>
+                </div>
               </div>
+
+              <aside class="results-side">
+                <div class="card subtle">
+                  <h3>Narrative summary</h3>
+                  <p id="starter-summary" class="side-text"></p>
+                </div>
+                <div class="card subtle">
+                  <h3>Compliance &amp; risk notes</h3>
+                  <p id="starter-compliance" class="side-text"></p>
+                </div>
+                <div class="card subtle">
+                  <h3>Next steps</h3>
+                  <ol class="side-list">
+                    <li>Download your CSV and share with your customs broker</li>
+                    <li>Request quotes from the recommended countries</li>
+                    <li>Upgrade to Pro Monthly for bulk portfolio analysis</li>
+                  </ol>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ═══════════════════════════════════════
+         PRO – up to 5 SKUs
+    ════════════════════════════════════════ -->
+    <section id="plan-pro" class="paid-section hidden">
+      <div class="container">
+        <div style="margin-bottom: 1rem;">
+          <h2 style="margin: 0 0 0.25rem;">Pro Analysis – Portfolio (up to 5 SKUs)</h2>
+          <p class="pricing-intro" style="margin: 0;">Add up to 5 products. Each gets AI HS classification and a 5-country landed cost comparison. Download the full portfolio CSV and PDF pack.</p>
+        </div>
+
+        <div class="card starter-demo-card">
+          <form id="pro-form" novalidate onsubmit="return false;">
+            <div id="pro-sku-container"></div>
+            <button type="button" class="btn btn-ghost" id="proAddSkuButton">+ Add SKU</button>
+            <div class="status-row">
+              <span id="proStatus" class="status-pill status-idle">Ready to run (0 SKUs added, max 5)</span>
+            </div>
+            <button type="button" class="btn btn-primary btn-full" id="proRunButton">
+              Run Pro analysis →
+            </button>
+            <p class="disclaimer">HS suggestions are AI-generated and indicative only. Always confirm with your broker.</p>
+          </form>
+
+          <div id="pro-results-section" class="results-section nested hidden">
+            <div class="results-header">
+              <div>
+                <h3>Pro results – portfolio</h3>
+                <p id="pro-results-intro" class="results-intro"></p>
+              </div>
+              <div class="results-actions">
+                <button id="proDownloadCsvButton" class="btn btn-outline">Download CSV</button>
+                <button id="proDownloadPdfButton" class="btn btn-outline">Download PDF</button>
+              </div>
+            </div>
+
+            <div class="results-layout">
+              <div class="results-main">
+                <div class="table-card card">
+                  <div class="table-caption-row">
+                    <p class="caption-title">SKU-by-SKU savings summary</p>
+                    <p class="caption-note">Highlights where a sourcing shift may justify an RFQ.</p>
+                  </div>
+                  <div class="table-wrapper">
+                    <table id="pro-results-table">
+                      <thead>
+                        <tr>
+                          <th>SKU</th>
+                          <th>Suggested lane</th>
+                          <th>Current annual</th>
+                          <th>Suggested annual</th>
+                          <th>Annual savings</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="metrics-grid">
+                  <div class="metric card">
+                    <h3>Total estimated annual savings</h3>
+                    <p id="pro-total-savings" class="metric-main"></p>
+                    <p class="metric-note">Sum of positive savings across all SKUs.</p>
+                  </div>
+                  <div class="metric card">
+                    <h3>Portfolio narrative</h3>
+                    <p id="pro-portfolio-summary" class="metric-main side-text"></p>
+                  </div>
+                </div>
+
+                <!-- Upsell to Pro Monthly -->
+                <div class="card" style="margin-top: 1rem; background: linear-gradient(135deg, #1e1b4b, #312e81); border: none;">
+                  <p style="margin: 0 0 0.2rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #a5b4fc;">Need to analyze your full range?</p>
+                  <h3 style="margin: 0 0 0.5rem; font-size: 1rem; color: #fff;">Pro Monthly – bulk CSV upload, up to 100 SKUs per run</h3>
+                  <p style="margin: 0 0 0.75rem; font-size: 0.85rem; color: #c7d2fe; line-height: 1.5;">
+                    Upload your entire product catalogue and get a portfolio-wide landed cost analysis in minutes. Unlimited runs per month.
+                  </p>
+                  <a href="/#starter" class="btn btn-primary" style="background: #6366f1; border-color: #6366f1;">Upgrade to Pro Monthly – $49/mo →</a>
+                </div>
+              </div>
+
+              <aside class="results-side">
+                <div class="card subtle">
+                  <h3>Risk drivers</h3>
+                  <p id="pro-risk-panel" class="side-text"></p>
+                </div>
+                <div class="card subtle">
+                  <h3>Next steps</h3>
+                  <ul id="pro-next-steps" class="side-list"></ul>
+                </div>
+                <div class="card subtle">
+                  <h3>Save to dashboard</h3>
+                  <p class="side-text">Pro Monthly subscribers can save runs to their analysis history.</p>
+                  <button type="button" class="btn btn-outline btn-full" id="proSaveToDashboardButton">
+                    Save this run →
+                  </button>
+                  <p id="dashboardSaveStatus" class="hint"></p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PRO MONTHLY – bulk CSV upload, up to 100 SKUs
+    ════════════════════════════════════════ -->
+    <section id="plan-pro-monthly" class="paid-section hidden">
+      <div class="container">
+        <div style="margin-bottom: 1rem;">
+          <h2 style="margin: 0 0 0.25rem;">Pro Monthly – Bulk Portfolio Analysis</h2>
+          <p class="pricing-intro" style="margin: 0;">Upload a CSV with up to 100 SKUs and get a full landed-cost portfolio in one run. Download results as CSV anytime. Runs are unlimited.</p>
+        </div>
+
+        <div class="card starter-demo-card">
+
+          <!-- Step 1: Upload -->
+          <div id="bulk-upload-section">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1.25rem;">
+              <h3 style="margin: 0; font-size: 1rem;">Step 1 — Upload your SKU list</h3>
+              <button type="button" class="btn btn-ghost" id="bulkDownloadTemplateButton" style="font-size: 0.85rem;">
+                ↓ Download CSV template
+              </button>
+            </div>
+
+            <div style="background: #f8fafc; border: 2px dashed #d1d5db; border-radius: 10px; padding: 2rem; text-align: center; margin-bottom: 1.25rem;" id="bulk-drop-zone">
+              <p style="margin: 0 0 0.75rem; color: #6b7280; font-size: 0.9rem;">
+                CSV columns: <code style="background: #e5e7eb; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.82rem;">sku_label, description, current_country, unit_cost_usd, annual_volume, hs_code</code>
+              </p>
+              <p style="margin: 0 0 1rem; font-size: 0.8rem; color: #9ca3af;">current_country values: china · vietnam · mexico · india · usa &nbsp;|&nbsp; hs_code is optional &nbsp;|&nbsp; max 100 rows</p>
+              <label style="cursor: pointer;">
+                <span class="btn btn-outline" style="display: inline-block;">Choose CSV file</span>
+                <input type="file" id="bulkCsvInput" accept=".csv" style="display: none;" />
+              </label>
+            </div>
+
+            <!-- Preview table -->
+            <div id="bulk-preview-section" class="hidden">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                <p style="margin: 0; font-size: 0.875rem; color: #374151;"><strong id="bulk-preview-count">0</strong> SKUs detected — preview (first 5 rows):</p>
+                <button type="button" class="btn btn-ghost" id="bulkClearButton" style="font-size: 0.8rem;">Clear &amp; re-upload</button>
+              </div>
+              <div class="table-wrapper" style="margin-bottom: 1.25rem;">
+                <table id="bulk-preview-table" style="font-size: 0.82rem;">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>SKU label</th>
+                      <th>Description</th>
+                      <th>Country</th>
+                      <th>Unit cost</th>
+                      <th>Volume</th>
+                      <th>HS code</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div class="status-row">
+                <span id="bulkStatus" class="status-pill status-idle">Ready to run</span>
+              </div>
+              <button type="button" class="btn btn-primary btn-full" id="bulkRunButton">
+                Run bulk analysis →
+              </button>
+              <p class="disclaimer">SKUs without an HS code will receive AI classification. Analyses with 20+ SKUs may take 30–60 seconds.</p>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div id="bulk-results-section" class="results-section nested hidden" style="margin-top: 1.5rem;">
+            <div class="results-header">
+              <div>
+                <h3>Bulk results – <span id="bulk-results-count">0</span> SKUs</h3>
+                <p id="bulk-results-intro" class="results-intro"></p>
+              </div>
+              <div class="results-actions">
+                <button id="bulkDownloadCsvButton" class="btn btn-outline">Download full CSV</button>
+                <button type="button" class="btn btn-outline" id="proSaveToDashboardButton">Save to dashboard</button>
+              </div>
+            </div>
+
+            <div class="results-layout">
+              <div class="results-main">
+                <div class="metrics-grid" style="margin-bottom: 1rem;">
+                  <div class="metric card">
+                    <h3>Total estimated annual savings</h3>
+                    <p id="bulk-total-savings" class="metric-main"></p>
+                    <p class="metric-note">Sum of positive savings vs current lanes.</p>
+                  </div>
+                  <div class="metric card">
+                    <h3>SKUs with savings opportunity</h3>
+                    <p id="bulk-savings-count" class="metric-main"></p>
+                    <p class="metric-note">SKUs where a lane switch improves landed cost.</p>
+                  </div>
+                </div>
+
+                <div class="table-card card">
+                  <div class="table-caption-row">
+                    <p class="caption-title">Full portfolio – SKU-by-SKU</p>
+                    <p class="caption-note">Based on 2026 tariff heuristics. Download CSV for the complete dataset.</p>
+                  </div>
+                  <div class="table-wrapper">
+                    <table id="bulk-results-table" style="font-size: 0.82rem;">
+                      <thead>
+                        <tr>
+                          <th>SKU</th>
+                          <th>HS code</th>
+                          <th>Current lane</th>
+                          <th>Best lane</th>
+                          <th>Current annual</th>
+                          <th>Best annual</th>
+                          <th>Annual savings</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="results-side">
+                <div class="card subtle">
+                  <h3>Portfolio narrative</h3>
+                  <p id="bulk-portfolio-summary" class="side-text"></p>
+                </div>
+                <div class="card subtle">
+                  <h3>Next steps</h3>
+                  <ol class="side-list">
+                    <li>Download full CSV and share with your broker</li>
+                    <li>Short-list 2–3 high-savings SKUs for RFQs</li>
+                    <li>Layer in lead time and capacity before committing</li>
+                  </ol>
+                </div>
+                <div class="card subtle">
+                  <h3>Save to dashboard</h3>
+                  <p class="side-text">Save this run to your Pro Monthly analysis history.</p>
+                  <p id="dashboardSaveStatus" class="hint"></p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fallback – no plan param -->
+    <section id="plan-fallback" class="paid-section hidden">
+      <div class="container" style="text-align: center; padding: 4rem 0;">
+        <h2 style="margin: 0 0 0.75rem;">No plan detected</h2>
+        <p style="color: #6b7280; margin: 0 0 1.5rem;">This workspace is for SourcingLens customers. Purchase a plan to get started.</p>
+        <a href="/#starter" class="btn btn-primary btn-large">View pricing →</a>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
     <div class="container footer-inner">
       <p>© <span id="year">2026</span> SourcingLens. All rights reserved.</p>
       <p class="footer-links">
-        <a href="privacy.html">Privacy</a> •
-        <a href="terms.html">Terms</a> •
-        <a href="disclaimer.html">Disclaimer</a>
+        <a href="/privacy.html">Privacy</a> •
+        <a href="/terms.html">Terms</a> •
+        <a href="/disclaimer.html">Disclaimer</a>
       </p>
     </div>
   </footer>
