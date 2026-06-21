@@ -1,0 +1,50 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides"
+  to = "/guides.html"
+  status = 200
+
+[[redirects]]
+  from = "/result"
+  to = "/result.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/disclaimer"
+  to = "/disclaimer.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/china-tariff-calculator-2026"
+  to = "/blog/china-tariff-calculator-2026.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/vietnam-vs-china-landed-cost-2026"
+  to = "/blog/vietnam-vs-china-landed-cost-2026.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/how-to-find-hs-code"
+  to = "/blog/how-to-find-hs-code.html"
+  status = 200
+
+[functions]
+  directory = "netlify/functions"
