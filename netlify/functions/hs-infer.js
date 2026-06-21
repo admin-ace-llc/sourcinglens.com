@@ -64,15 +64,23 @@ If you are unsure, use "000000".`;
     }
 
     const data = await resp.json();
-    const raw = data.output_text || data.output || data.choices?.[0]?.message?.content || "";
+    // Responses API: output_text is a convenience string; fallback to output array content
+    const raw = data.output_text
+      || data.output?.[0]?.content?.[0]?.text
+      || data.choices?.[0]?.message?.content
+      || "";
+    // Strip markdown code fences if the model wraps the JSON
+    const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/```$/i, "").trim();
     let hsCode = "";
     let reason = "";
     try {
-      const parsed = JSON.parse(raw);
+      const parsed = JSON.parse(cleaned);
       hsCode = parsed.hsCode || "";
       reason = parsed.reason || "";
     } catch (e) {
-      hsCode = "000000";
+      // Try extracting a 6-digit code from the raw text as a last resort
+      const match = cleaned.match(/\b(\d{6})\b/);
+      hsCode = match ? match[1] : "000000";
       reason = "Parsing error – treat as unknown.";
     }
 

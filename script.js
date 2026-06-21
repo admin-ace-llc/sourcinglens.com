@@ -103,12 +103,16 @@ let starterLastRun = null;
 let proLastRun = null;
 
 // Country heuristics
+// Tariff rates reflect 2026 effective rates (MFN + Section 301 where applicable).
+// China: ~27% combined (25% Section 301 + ~2% MFN, representative for electronics/consumer goods).
+// baseFactor reflects typical FOB price differential vs a China baseline.
+// These are directional heuristics; Starter/Pro use AI-suggested HS codes for refinement.
 const COUNTRY_CONFIG = {
-  china:   { label: "China",   baseFactor: 1.00, tariff: 0.08, ship: 0.70 },
-  vietnam: { label: "Vietnam", baseFactor: 0.98, tariff: 0.05, ship: 0.75 },
-  mexico:  { label: "Mexico",  baseFactor: 1.04, tariff: 0.02, ship: 0.55 },
-  india:   { label: "India",   baseFactor: 0.96, tariff: 0.06, ship: 0.78 },
-  usa:     { label: "USA",     baseFactor: 1.18, tariff: 0.00, ship: 0.30 }
+  china:   { label: "China",   baseFactor: 1.00, tariff: 0.27, ship: 0.70 },
+  vietnam: { label: "Vietnam", baseFactor: 1.10, tariff: 0.04, ship: 0.75 },
+  mexico:  { label: "Mexico",  baseFactor: 1.22, tariff: 0.02, ship: 0.55 },
+  india:   { label: "India",   baseFactor: 1.02, tariff: 0.05, ship: 0.78 },
+  usa:     { label: "USA",     baseFactor: 1.35, tariff: 0.00, ship: 0.30 }
 };
 
 const COUNTRY_KEYS = ["china", "vietnam", "mexico", "india", "usa"];
