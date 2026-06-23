@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CAPE Declaration: Step-by-Step Guide for US Importers (2026) | SourcingLens</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="How to file a CAPE Declaration in ACE and claim your IEEPA tariff refund. Step-by-step guide covering ACE portal setup, CSV format, Phase 1 eligibility, and what to expect after filing." />
+  <meta name="keywords" content="CAPE declaration guide, how to file CAPE declaration, ACE portal IEEPA refund, CBP CAPE CSV format, IEEPA duty refund step by step" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://sourcinglens.com/blog/cape-declaration-step-by-step.html" />
+  <meta property="og:title" content="CAPE Declaration: Step-by-Step Filing Guide for US Importers" />
+  <meta property="og:description" content="Exactly how to file your CAPE Declaration in the ACE portal and claim your IEEPA tariff refund. Covers setup, CSV format, Phase 1 vs Phase 2, and refund timeline." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sourcinglens.com/blog/cape-declaration-step-by-step.html" />
+  <meta property="og:image" content="https://sourcinglens.com/og-image.jpg" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to File a CAPE Declaration for IEEPA Tariff Refunds",
+    "datePublished": "2026-06-23",
+    "author": { "@type": "Organization", "name": "SourcingLens" },
+    "description": "Step-by-step guide to filing a CAPE Declaration in ACE to claim IEEPA tariff refunds.",
+    "step": [
+      { "@type": "HowToStep", "name": "Confirm ACE portal access", "text": "Log into ACE Secure Data Portal and verify your Importer of Record account." },
+      { "@type": "HowToStep", "name": "Enroll in ACH", "text": "Add your bank details to receive electronic refund payments." },
+      { "@type": "HowToStep", "name": "Pull your entry list", "text": "Export your entry history for Feb 4 2025 – Feb 24 2026 from ACE." },
+      { "@type": "HowToStep", "name": "Format your CAPE CSV", "text": "Create a CSV with one entry number per row." },
+      { "@type": "HowToStep", "name": "Submit in ACE", "text": "Navigate to the CAPE tab and upload your CSV." }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="../styles.css" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GC2PCY5GQ9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GC2PCY5GQ9');</script>
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','746565754481982');fbq('track','PageView');
+  </script>
+  <style>
+    .article-wrap { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    .article-wrap h1 { font-size: clamp(1.6rem,3.5vw,2.2rem); line-height:1.2; margin:0 0 1rem; }
+    .article-meta { font-size:0.82rem; color:#6b7280; margin:0 0 2rem; display:flex; gap:1.5rem; flex-wrap:wrap; }
+    .article-wrap h2 { font-size:1.2rem; margin:2.25rem 0 0.6rem; color:#111827; }
+    .article-wrap h3 { font-size:1rem; margin:1.5rem 0 0.4rem; color:#1e1b4b; }
+    .article-wrap p  { line-height:1.75; color:#374151; margin:0 0 1rem; }
+    .article-wrap ul, .article-wrap ol { padding-left:1.4rem; margin:0 0 1rem; }
+    .article-wrap li { line-height:1.7; color:#374151; margin-bottom:0.35rem; }
+    .article-wrap table { width:100%; border-collapse:collapse; margin:1.25rem 0; font-size:0.875rem; }
+    .article-wrap th { background:#f9fafb; padding:0.6rem 0.9rem; text-align:left; font-weight:600; color:#374151; border-bottom:2px solid #e5e7eb; }
+    .article-wrap td { padding:0.6rem 0.9rem; border-bottom:1px solid #f3f4f6; color:#374151; }
+    .article-wrap tr:last-child td { border-bottom:none; }
+    .callout { background:#eff6ff; border-left:4px solid #3b82f6; border-radius:0 8px 8px 0; padding:1rem 1.25rem; margin:1.5rem 0; }
+    .callout.green { background:#f0fdf4; border-color:#16a34a; }
+    .callout.amber { background:#fffbeb; border-color:#d97706; }
+    .callout p { margin:0; font-size:0.9rem; }
+    .callout strong { color:#1e40af; }
+    .callout.green strong { color:#166534; }
+    .callout.amber strong { color:#92400e; }
+    .step-block { display:flex; gap:1.25rem; margin:1.5rem 0; align-items:flex-start; }
+    .step-circle { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#4f46e5,#7c3aed); color:white; font-weight:800; font-size:0.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:0.1rem; }
+    .step-content h3 { margin:0 0 0.4rem; font-size:1rem; color:#111827; }
+    .step-content p  { margin:0; font-size:0.9rem; color:#374151; line-height:1.6; }
+    .code-block { background:#1e1b4b; color:#e0e7ff; font-family:monospace; font-size:0.85rem; padding:1rem 1.25rem; border-radius:10px; margin:1rem 0; overflow-x:auto; }
+    .code-block .comment { color:#6ee7b7; }
+    .cta-block { background:linear-gradient(135deg,#1e1b4b,#312e81); border-radius:16px; padding:2rem; text-align:center; margin:2.5rem 0; color:white; }
+    .cta-block h3 { margin:0 0 0.5rem; font-size:1.15rem; }
+    .cta-block p  { color:#c7d2fe; font-size:0.9rem; margin:0 0 1.25rem; }
+    .back-link { font-size:0.85rem; color:#6b7280; text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem; margin-bottom:1.5rem; }
+    .tag { display:inline-block; background:#e0e7ff; color:#3730a3; font-size:0.72rem; font-weight:700; padding:0.2rem 0.65rem; border-radius:999px; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.06em; }
+    .checklist { list-style:none; padding:0; }
+    .checklist li { display:flex; gap:0.6rem; align-items:flex-start; padding:0.35rem 0; font-size:0.9rem; color:#374151; }
+    .checklist li::before { content:"☐"; font-size:1rem; flex-shrink:0; }
+    .checklist li.done::before { content:"✅"; }
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a href="/" class="logo-link"><span class="logo-mark">◎</span><span class="logo-text">Sourcing<span>Lens</span></span></a>
+      <p class="tagline">Know your true costs before the next RFQ.</p>
+    </div>
+    <nav class="nav-links">
+      <a class="nav-link" href="/#free">Landed Cost</a>
+      <a class="nav-link" href="/ieepa-refund.html" style="color:#6ee7b7;">IEEPA Refunds</a>
+      <a class="nav-link" href="/blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="article-wrap">
+    <a href="/blog.html" class="back-link">← All articles</a>
+    <span class="tag">Filing Guide</span>
+    <h1>CAPE Declaration: Step-by-Step Guide to Filing Your IEEPA Tariff Refund</h1>
+    <div class="article-meta">
+      <span>📅 June 2026</span>
+      <span>⏱ 8 min read</span>
+      <span>✍️ SourcingLens</span>
+    </div>
+
+    <div class="callout green">
+      <p><strong>Who this is for:</strong> US importers who paid IEEPA tariffs between Feb 4, 2025 and Feb 24, 2026 and want to file their own CAPE Declaration as Importer of Record — without needing a customs broker.</p>
+    </div>
+
+    <p>CBP opened the CAPE (Consolidated Administration and Processing of Entries) portal on April 20, 2026. It's the only official channel for claiming IEEPA tariff refunds. This guide walks through the complete process — from getting ACE access to receiving your ACH deposit.</p>
+
+    <h2>Before you start: your pre-flight checklist</h2>
+    <ul class="checklist">
+      <li>You are listed as the Importer of Record on your Form 7501 entry summaries</li>
+      <li>Your entries include dates between Feb 4, 2025 and Feb 24, 2026</li>
+      <li>You (or your broker) filed the entries directly — entries filed by a broker require the broker to submit unless they've authorized you</li>
+      <li>You have or can get an ACE Secure Data Portal account</li>
+      <li>You have your bank routing number and account number ready for ACH enrollment</li>
+    </ul>
+
+    <h2>Step 1 — Get ACE Secure Data Portal access</h2>
+    <div class="step-block">
+      <div class="step-circle">1</div>
+      <div class="step-content">
+        <h3>Apply for or verify your ACE account</h3>
+        <p>Go to <strong>ace.cbp.dhs.gov</strong> and log in. If you don't have an account, apply through CBP's portal at cbp.gov. Account provisioning typically takes 2–3 business days. You need an Importer account (not an Exporter account).</p>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <p><strong>Already using a customs broker?</strong> If your broker filed your entries on your behalf, they likely already have ACE access for your account. Contact them — they can submit the CAPE Declaration directly, which is often faster than setting up your own IOR access.</p>
+    </div>
+
+    <h2>Step 2 — Enroll in ACH for refund payments</h2>
+    <div class="step-block">
+      <div class="step-circle">2</div>
+      <div class="step-content">
+        <h3>Add your bank details to ACE</h3>
+        <p>In your ACE portal, navigate to your <strong>Importer sub-account</strong>. Find the revenue/payment section and add your ACH bank routing number and account number. This step is mandatory — CBP cannot issue refunds without it, and this detail is not shared with your broker's account automatically.</p>
+      </div>
+    </div>
+
+    <h2>Step 3 — Pull your entry history</h2>
+    <div class="step-block">
+      <div class="step-circle">3</div>
+      <div class="step-content">
+        <h3>Export your import entries from ACE</h3>
+        <p>In ACE, run an entry history report for the period February 4, 2025 through February 24, 2026. Export it as a CSV. The report should include entry numbers, entry dates, liquidation dates, HTS classifications, and duty amounts. Filter for entries where Chapter 99 codes (9903.01.xx or 9903.08.xx) appear — these are your IEEPA-eligible entries.</p>
+      </div>
+    </div>
+
+    <p>If you can't access ACE entry history directly, your customs broker can pull this report. Alternatively, gather your Form 7501 entry summaries — every shipment has one.</p>
+
+    <h2>Step 4 — Build your CAPE CSV</h2>
+    <div class="step-block">
+      <div class="step-circle">4</div>
+      <div class="step-content">
+        <h3>Format your entry list exactly as CBP requires</h3>
+        <p>The CAPE Declaration CSV is simple — a single column of entry numbers, one per row. Maximum 9,999 entries per declaration (submit multiple files if you have more).</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <span class="comment">Entry Number</span><br>
+      SFO-2847391-0<br>
+      LAX-3910284-2<br>
+      JFK-5501938-4<br>
+      CHI-1029384-7<br>
+      <span class="comment">... (up to 9,999 rows per file)</span>
+    </div>
+
+    <div class="callout">
+      <p><strong>Only include Phase 1 eligible entries</strong> in your first CAPE Declaration. These are entries that are currently unliquidated, or that liquidated within the past 80 days. Including already-liquidated entries older than 80 days won't cause errors but those entries will need to wait for Phase 2 processing.</p>
+    </div>
+
+    <h2>Step 5 — Submit via the CAPE tab in ACE</h2>
+    <div class="step-block">
+      <div class="step-circle">5</div>
+      <div class="step-content">
+        <h3>Upload your CSV to the CAPE module</h3>
+        <p>Log into ACE, navigate to the <strong>CAPE tab</strong> (added April 20, 2026). Click "New CAPE Declaration," upload your CSV file, and submit. CBP validates the entry numbers against their database. You'll receive a confirmation number.</p>
+      </div>
+    </div>
+
+    <h2>Step 6 — Wait for ACH deposit</h2>
+    <div class="step-block">
+      <div class="step-circle">6</div>
+      <div class="step-content">
+        <h3>Track your refund status in ACE</h3>
+        <p>CBP processes accepted declarations within 60–90 days. Once entries are liquidated or reliquidated, ACH deposits arrive within 3–5 weeks. Your refund includes the original IEEPA duty amount plus 6% annual statutory interest calculated from your original payment date to the refund date.</p>
+      </div>
+    </div>
+
+    <h2>How long will my refund take?</h2>
+    <table>
+      <thead><tr><th>Stage</th><th>Expected timeline</th></tr></thead>
+      <tbody>
+        <tr><td>CAPE Declaration submitted → CBP acceptance</td><td>1–5 business days</td></tr>
+        <tr><td>Acceptance → entry liquidation/reliquidation</td><td>30–60 days</td></tr>
+        <tr><td>Liquidation → ACH deposit</td><td>3–5 weeks</td></tr>
+        <tr><td><strong>Total (typical)</strong></td><td><strong>60–90 days end-to-end</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h2>What about Phase 2?</h2>
+    <p>Phase 2 will cover entries that were liquidated more than 80 days before your CAPE filing date. CBP has confirmed Phase 2 is coming but has not announced a launch date. These entries are still refundable — they just can't be included in Phase 1 CAPE Declarations.</p>
+    <p>Recommendation: file Phase 1 now to start the clock on your most time-sensitive entries, then file Phase 2 when CBP opens that window. Our tool flags which of your entries fall into each phase.</p>
+
+    <h2>Can I file if my entries were filed by a broker?</h2>
+    <p>Yes — there are two paths:</p>
+    <ol>
+      <li><strong>Ask your broker to file CAPE on your behalf.</strong> They're already your authorized agent and have your entry history. Many brokers are handling this as a routine service.</li>
+      <li><strong>File yourself as IOR.</strong> Even if your broker filed the original entries, you as the Importer of Record can submit a CAPE Declaration for those same entries via your own ACE account.</li>
+    </ol>
+
+    <div class="cta-block">
+      <h3>We generate your CAPE CSV automatically</h3>
+      <p>Upload your ACE export or Form 7501 PDFs. We identify your eligible entries, calculate your estimated refund with interest, and produce a CBP-formatted CAPE CSV ready to upload.</p>
+      <a href="/ieepa-refund.html" class="btn btn-primary" style="background:white;color:#1e1b4b;font-weight:700;">Generate my CAPE CSV — $79 →</a>
+      <p style="font-size:0.78rem;color:#a5b4fc;margin:0.5rem 0 0;">One-time · Instant download</p>
+    </div>
+
+    <h2>Troubleshooting common issues</h2>
+    <table>
+      <thead><tr><th>Problem</th><th>Likely cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>CAPE Declaration rejected</td><td>Entry numbers not found or wrong format</td><td>Verify format matches your original 7501 — typically XXX-XXXXXXX-X</td></tr>
+        <tr><td>No ACH deposit after 90 days</td><td>Missing bank enrollment in ACE</td><td>Add ACH details in your Importer sub-account</td></tr>
+        <tr><td>Partial refund amount</td><td>Some entries had both IEEPA and non-IEEPA duty — only IEEPA portion is refunded</td><td>This is correct — MFN base rates are not refundable</td></tr>
+        <tr><td>Entry not eligible for Phase 1</td><td>Liquidated more than 80 days ago</td><td>Wait for Phase 2 — entry is still refundable</td></tr>
+        <tr><td>Compliance review delay</td><td>CBP flagged entry for manual review</td><td>Normal for some entries — wait up to 180 days or contact CBP</td></tr>
+      </tbody>
+    </table>
+
+    <hr style="margin:2.5rem 0;border:none;border-top:1px solid #e5e7eb;" />
+    <p style="font-size:0.8rem;color:#9ca3af;line-height:1.6;">
+      <strong>Disclaimer:</strong> This guide is for informational purposes only. Only the Importer of Record or a licensed customs broker may submit a CAPE Declaration to CBP. This does not constitute legal or customs brokerage advice.
+    </p>
+
+    <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #e5e7eb;display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <a href="/blog/how-much-ieepa-refund-am-i-owed.html" style="font-size:0.875rem;color:#4f46e5;text-decoration:none;">Next: How much refund am I owed? →</a>
+      <a href="/blog/ieepa-tariff-refund-guide-2026.html" style="font-size:0.875rem;color:#6b7280;text-decoration:none;">← IEEPA refund overview</a>
+    </div>
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand-block"><span class="logo-mark">◎</span><span class="logo-text">Sourcing<span>Lens</span></span></div>
+      <p class="footer-tagline">AI-powered tools for US importers.</p>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-column"><h4>Tools</h4><ul class="footer-links"><li><a href="/">Landed Cost</a></li><li><a href="/ieepa-refund.html">IEEPA Refunds</a></li></ul></div>
+      <div class="footer-column"><h4>Resources</h4><ul class="footer-links"><li><a href="/blog.html">Blog</a></li><li><a href="/guides.html">Guides</a></li></ul></div>
+      <div class="footer-column"><h4>Company</h4><ul class="footer-links"><li><a href="/privacy.html">Privacy</a></li><li><a href="/terms.html">Terms</a></li><li><a href="mailto:enquiries.talkace@gmail.com">Contact</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>&copy; 2026 SourcingLens. All rights reserved.</p></div></div>
+</footer>
+</body>
+</html>
