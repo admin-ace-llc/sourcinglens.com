@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IEEPA Tariff Refund Analyzer | SourcingLens</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Find out how much IEEPA tariff refund you're owed. Upload your ACE entry history or CBP Form 7501s — get a full eligibility report and CAPE-ready CSV in minutes." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://sourcinglens.com/ieepa-refund.html" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','746565754481982');fbq('track','PageView');
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GC2PCY5GQ9"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GC2PCY5GQ9');</script>
+
+  <style>
+    .ieepa-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #312e81 100%);
+      color: white;
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+    .ieepa-hero h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); margin: 0 0 1rem; line-height: 1.2; }
+    .ieepa-hero p  { color: #c7d2fe; font-size: 1.05rem; max-width: 620px; margin: 0 auto 0.5rem; line-height: 1.6; }
+    .stat-strip {
+      display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .stat-item { text-align: center; }
+    .stat-num  { font-size: 1.8rem; font-weight: 800; color: #a5b4fc; display: block; }
+    .stat-lbl  { font-size: 0.78rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; }
+    .steps-section { padding: 3rem 0 2rem; background: #f8fafc; border-bottom: 1px solid #e5e7eb; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .step-card { text-align: center; padding: 1.5rem 1rem; }
+    .step-num { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem; font-size: 1rem; }
+    .step-title { font-weight: 700; font-size: 0.95rem; margin: 0 0 0.4rem; color: #111827; }
+    .step-desc  { font-size: 0.85rem; color: #6b7280; line-height: 1.5; margin: 0; }
+    .upload-section { padding: 3rem 0; }
+    .upload-box {
+      border: 2px dashed #c7d2fe; border-radius: 16px;
+      padding: 3rem 2rem; text-align: center; cursor: pointer;
+      transition: all 0.2s; background: #fafbff;
+      position: relative;
+    }
+    .upload-box:hover, .upload-box.drag-over { border-color: #4f46e5; background: #eef2ff; }
+    .upload-box input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .upload-title { font-size: 1.1rem; font-weight: 700; color: #1e1b4b; margin: 0 0 0.4rem; }
+    .upload-sub   { font-size: 0.875rem; color: #6b7280; margin: 0 0 1rem; }
+    .upload-formats { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    .format-chip { background: #e0e7ff; color: #3730a3; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.65rem; border-radius: 999px; }
+    .file-list { margin-top: 1rem; text-align: left; }
+    .file-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: white; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 0.4rem; font-size: 0.85rem; }
+    .file-item .fi-name { flex: 1; color: #374151; font-weight: 500; }
+    .file-item .fi-size { color: #9ca3af; font-size: 0.78rem; }
+    .fi-remove { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1rem; padding: 0; }
+    .analyze-btn { width: 100%; margin-top: 1.25rem; font-size: 1rem; padding: 0.85rem; }
+    .progress-bar { height: 4px; background: #e5e7eb; border-radius: 2px; overflow: hidden; margin-top: 1rem; display: none; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #4f46e5, #7c3aed); border-radius: 2px; transition: width 0.4s ease; }
+    .progress-label { font-size: 0.8rem; color: #6b7280; margin-top: 0.4rem; text-align: center; display: none; }
+
+    /* Free preview results */
+    #free-preview { display: none; margin-top: 2rem; }
+    .preview-header {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      color: white; border-radius: 16px 16px 0 0; padding: 1.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    .preview-title { font-size: 1.1rem; font-weight: 700; margin: 0; }
+    .preview-subtitle { font-size: 0.85rem; color: #a5b4fc; margin: 0.25rem 0 0; }
+    .refund-badge {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 0.75rem 1.25rem; text-align: center;
+    }
+    .refund-amount { font-size: 1.6rem; font-weight: 800; color: #6ee7b7; display: block; }
+    .refund-label  { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; }
+    .preview-body  { background: white; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 16px 16px; }
+    .preview-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-bottom: 1px solid #e5e7eb; }
+    .pstat { padding: 1rem; text-align: center; border-right: 1px solid #e5e7eb; }
+    .pstat:last-child { border-right: none; }
+    .pstat-num  { font-size: 1.35rem; font-weight: 800; color: #1e1b4b; display: block; }
+    .pstat-lbl  { font-size: 0.75rem; color: #6b7280; margin-top: 0.2rem; }
+    .pstat-good { color: #16a34a; }
+    .pstat-warn { color: #d97706; }
+
+    /* Blurred table preview */
+    .blurred-preview { position: relative; padding: 1.5rem; }
+    .blur-overlay {
+      position: absolute; inset: 0; border-radius: 0 0 16px 16px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.97) 40%);
+      display: flex; align-items: flex-end; justify-content: center; padding-bottom: 2rem; z-index: 2;
+    }
+    .blur-cta-box { text-align: center; max-width: 360px; }
+    .blur-cta-box h3 { font-size: 1.1rem; margin: 0 0 0.4rem; color: #111827; }
+    .blur-cta-box p  { font-size: 0.875rem; color: #6b7280; margin: 0 0 1rem; }
+    .preview-table { width: 100%; border-collapse: collapse; filter: blur(3px); pointer-events: none; user-select: none; }
+    .preview-table th { background: #f9fafb; padding: 0.6rem 0.75rem; font-size: 0.75rem; font-weight: 600; text-align: left; color: #6b7280; border-bottom: 1px solid #e5e7eb; text-transform: uppercase; letter-spacing: 0.04em; }
+    .preview-table td { padding: 0.6rem 0.75rem; font-size: 0.82rem; color: #374151; border-bottom: 1px solid #f3f4f6; }
+    .badge-p1 { background: #dcfce7; color: #166534; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; }
+    .badge-p2 { background: #fef3c7; color: #92400e; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; }
+    .badge-no { background: #f3f4f6; color: #9ca3af; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px; }
+
+    /* Pricing */
+    .pricing-section { padding: 3rem 0; background: #f8fafc; border-top: 1px solid #e5e7eb; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 780px; margin: 0 auto; }
+    .price-card { background: white; border: 1px solid #e5e7eb; border-radius: 20px; padding: 2rem; }
+    .price-card.featured { border: 2px solid #4f46e5; position: relative; }
+    .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #4f46e5; color: white; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.9rem; border-radius: 999px; letter-spacing: 0.05em; white-space: nowrap; }
+    .price-name  { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7280; margin: 0 0 0.5rem; }
+    .price-amount{ font-size: 2.2rem; font-weight: 800; color: #111827; margin: 0 0 0.25rem; }
+    .price-desc  { font-size: 0.875rem; color: #6b7280; margin: 0 0 1.25rem; line-height: 1.5; }
+    .price-features { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+    .price-features li { font-size: 0.875rem; color: #374151; padding: 0.35rem 0; display: flex; align-items: flex-start; gap: 0.5rem; }
+    .price-features li::before { content: "✓"; color: #16a34a; font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+    .price-features li.muted::before { content: "—"; color: #d1d5db; }
+    .price-features li.muted { color: #9ca3af; }
+
+    /* FAQ */
+    .faq-section { padding: 3rem 0; }
+    .faq-item { border-bottom: 1px solid #e5e7eb; padding: 1.25rem 0; }
+    .faq-q { font-weight: 600; font-size: 0.95rem; color: #111827; margin: 0 0 0.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-a { font-size: 0.875rem; color: #6b7280; line-height: 1.6; margin: 0; }
+
+    /* Disclaimer */
+    .disclaimer-bar { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 1rem 1.25rem; font-size: 0.8rem; color: #92400e; line-height: 1.55; margin-top: 1.5rem; }
+
+    @media (max-width: 640px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .preview-stats { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand-block">
+      <a href="/" class="logo-link" aria-label="SourcingLens home">
+        <span class="logo-mark">◎</span>
+        <span class="logo-text">Sourcing<span>Lens</span></span>
+      </a>
+      <p class="tagline">Know your true costs before the next RFQ.</p>
+    </div>
+    <nav class="nav-links">
+      <a class="nav-link" href="/#free">Free Tool</a>
+      <a class="nav-link" href="/#starter">Pricing</a>
+      <a class="nav-link" href="/blog.html">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="ieepa-hero">
+    <div class="container">
+      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#818cf8;margin:0 0 0.75rem;">IEEPA Tariff Refund Analyzer</p>
+      <h1>Find out what the government<br>owes your business</h1>
+      <p>The Supreme Court ruled IEEPA tariffs unlawful. If you imported between Feb 4, 2025 and Feb 24, 2026, you may be owed a significant refund. Upload your entry documents — we handle the analysis.</p>
+      <div class="stat-strip">
+        <div class="stat-item">
+          <span class="stat-num">$175B</span>
+          <span class="stat-lbl">Total refunds owed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">330K+</span>
+          <span class="stat-lbl">Importers eligible</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">60–90</span>
+          <span class="stat-lbl">Days to receive refund</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">Apr 2026</span>
+          <span class="stat-lbl">CAPE portal opened</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="steps-section">
+    <div class="container">
+      <p class="section-eyebrow" style="text-align:center;margin-bottom:0.5rem;">How it works</p>
+      <h2 style="text-align:center;margin:0 0 2rem;font-size:1.4rem;">From upload to CAPE-ready CSV in under 2 minutes</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <p class="step-title">Upload your documents</p>
+          <p class="step-desc">Export your ACE entry history CSV from the CBP portal, or upload your CBP Form 7501 PDFs. No manual entry.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <p class="step-title">AI analyzes eligibility</p>
+          <p class="step-desc">We extract entry numbers, IEEPA Chapter 99 duty codes, duty amounts paid, and liquidation dates — and calculate your estimated refund.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <p class="step-title">Download and claim</p>
+          <p class="step-desc">Get your CAPE-ready CSV (formatted exactly for the ACE portal) plus a full eligibility report. Upload it yourself or hand it to your broker.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upload -->
+  <section class="upload-section">
+    <div class="container" style="max-width:760px;">
+      <h2 style="margin:0 0 0.5rem;font-size:1.3rem;">Upload your import documents</h2>
+      <p style="color:#6b7280;font-size:0.9rem;margin:0 0 1.5rem;">We accept your ACE portal CSV export or individual CBP Form 7501 PDFs (up to 20 at once).</p>
+
+      <div class="upload-box" id="upload-box">
+        <input type="file" id="file-input" accept=".csv,.pdf" multiple />
+        <div class="upload-icon">📂</div>
+        <p class="upload-title">Drop files here or click to browse</p>
+        <p class="upload-sub">ACE entry history CSV or CBP Form 7501 PDFs</p>
+        <div class="upload-formats">
+          <span class="format-chip">ACE Export (.csv)</span>
+          <span class="format-chip">Form 7501 (.pdf)</span>
+        </div>
+      </div>
+
+      <div class="file-list" id="file-list"></div>
+
+      <div class="progress-bar" id="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <p class="progress-label" id="progress-label">Analyzing documents…</p>
+
+      <button class="btn btn-primary analyze-btn" id="analyze-btn" style="display:none;" onclick="runAnalysis()">
+        Analyze my entries →
+      </button>
+
+      <div class="disclaimer-bar">
+        🔒 Your documents are processed securely and never stored. Results are generated in your browser session only. This tool provides estimates for informational purposes — not legal or customs advice. Consult a licensed customs broker for your actual filing.
+      </div>
+
+      <!-- Free Preview Results -->
+      <div id="free-preview">
+        <div class="preview-header">
+          <div>
+            <p class="preview-title" id="preview-title">Analysis complete</p>
+            <p class="preview-subtitle" id="preview-subtitle">Based on your uploaded documents</p>
+          </div>
+          <div class="refund-badge">
+            <span class="refund-amount" id="refund-estimate">$0</span>
+            <span class="refund-label">Estimated refund + interest</span>
+          </div>
+        </div>
+        <div class="preview-body">
+          <div class="preview-stats">
+            <div class="pstat">
+              <span class="pstat-num" id="stat-total">0</span>
+              <span class="pstat-lbl">Entries scanned</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-num pstat-good" id="stat-p1">0</span>
+              <span class="pstat-lbl">Phase 1 eligible</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-num pstat-warn" id="stat-p2">0</span>
+              <span class="pstat-lbl">Phase 2 (future)</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-num" id="stat-duty">$0</span>
+              <span class="pstat-lbl">IEEPA duty paid</span>
+            </div>
+          </div>
+          <div class="blurred-preview">
+            <table class="preview-table" id="preview-table">
+              <thead>
+                <tr>
+                  <th>Entry Number</th>
+                  <th>Entry Date</th>
+                  <th>Country</th>
+                  <th>IEEPA Duty Paid</th>
+                  <th>Est. Refund</th>
+                  <th>Phase</th>
+                </tr>
+              </thead>
+              <tbody id="preview-tbody"></tbody>
+            </table>
+            <div class="blur-overlay">
+              <div class="blur-cta-box">
+                <h3>Your full report is ready</h3>
+                <p>Get your complete entry-by-entry breakdown, CAPE-ready CSV, and broker handoff package.</p>
+                <button class="btn btn-primary" onclick="initiatePayment()" style="width:100%;">Get Full Report — $79 →</button>
+                <p style="font-size:0.75rem;color:#9ca3af;margin:0.5rem 0 0;">One-time payment · Instant download</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing-section">
+    <div class="container">
+      <p class="section-eyebrow" style="text-align:center;margin-bottom:0.5rem;">Simple pricing</p>
+      <h2 style="text-align:center;margin:0 0 2rem;font-size:1.4rem;">Two tiers. No surprises.</h2>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <p class="price-name">Free Preview</p>
+          <p class="price-amount">$0</p>
+          <p class="price-desc">Upload your documents and instantly see your refund estimate and eligibility summary.</p>
+          <ul class="price-features">
+            <li>Upload ACE CSV or 7501 PDFs</li>
+            <li>Total eligible entries count</li>
+            <li>Estimated refund range</li>
+            <li>Phase 1 vs Phase 2 breakdown</li>
+            <li class="muted">Entry-by-entry breakdown</li>
+            <li class="muted">CAPE-ready CSV download</li>
+            <li class="muted">Broker handoff PDF</li>
+          </ul>
+          <a href="#upload-box" class="btn btn-outline" style="width:100%;text-align:center;display:block;">Upload and see estimate</a>
+        </div>
+        <div class="price-card featured">
+          <span class="featured-badge">MOST POPULAR</span>
+          <p class="price-name">Refund Report</p>
+          <p class="price-amount">$79</p>
+          <p class="price-desc">Everything you need to file your CAPE Declaration — formatted, verified, and ready to submit.</p>
+          <ul class="price-features">
+            <li>Upload ACE CSV or 7501 PDFs</li>
+            <li>Total eligible entries count</li>
+            <li>Estimated refund range</li>
+            <li>Phase 1 vs Phase 2 breakdown</li>
+            <li>Full entry-by-entry breakdown table</li>
+            <li>CAPE-ready CSV (CBP-formatted, upload directly to ACE)</li>
+            <li>Broker handoff PDF summary</li>
+            <li>Phase 2 deadline tracker per entry</li>
+          </ul>
+          <button class="btn btn-primary" onclick="initiatePayment()" style="width:100%;">Get Full Report — $79 →</button>
+          <p style="font-size:0.75rem;color:#9ca3af;text-align:center;margin:0.5rem 0 0;">One-time · Instant download after payment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="container" style="max-width:720px;">
+      <h2 style="margin:0 0 1.5rem;font-size:1.3rem;">Common questions</h2>
+
+      <div class="faq-item">
+        <p class="faq-q">What is an IEEPA tariff refund?</p>
+        <p class="faq-a">In February 2026, the US Supreme Court ruled that tariffs imposed under the International Emergency Economic Powers Act (IEEPA) — including the "reciprocal" tariffs from April 2025 — were unlawful. CBP must refund all IEEPA duties paid between February 4, 2025 and February 24, 2026, plus statutory interest (~7% annually).</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What documents do I need to upload?</p>
+        <p class="faq-a">The easiest source is your ACE Secure Data Portal entry history export (a CSV containing all your entry summaries). Alternatively, upload your CBP Form 7501 PDFs — one per shipment, up to 20 at a time. Your customs broker can also provide either of these.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What is the CAPE CSV and how do I use it?</p>
+        <p class="faq-a">CAPE (Consolidated Administration and Processing of Entries) is CBP's portal for submitting IEEPA refund claims. You upload a CSV of your eligible entry numbers into the CAPE tab in ACE. Our tool generates this CSV pre-formatted to CBP specifications. You or your licensed customs broker uploads it to ACE to initiate your refund.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What's the difference between Phase 1 and Phase 2?</p>
+        <p class="faq-a">Phase 1 covers entries that are unliquidated or liquidated within 80 days of your CAPE submission date. Phase 2 covers older liquidated entries and is expected to open later. We flag which of your entries fall into each phase so you know what to prioritize.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Do you file the CAPE Declaration on my behalf?</p>
+        <p class="faq-a">No — only the Importer of Record (that's you) or your licensed customs broker can submit the CAPE Declaration to CBP. We prepare all the documents; you or your broker submits them. This keeps us in the document preparation lane and you in full control of your filing.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Are my documents stored or shared?</p>
+        <p class="faq-a">No. Your documents are processed in your browser session and via our secure serverless function — never stored on our servers. The analysis results exist only in your browser session until you download them.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="brand-block">
+        <span class="logo-mark">◎</span>
+        <span class="logo-text">Sourcing<span>Lens</span></span>
+      </div>
+      <p class="footer-tagline">AI-powered tools for US importers.</p>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-column">
+        <h4>Tools</h4>
+        <ul class="footer-links">
+          <li><a href="/#free">Landed Cost Calculator</a></li>
+          <li><a href="/ieepa-refund.html">IEEPA Refund Analyzer</a></li>
+          <li><a href="/#starter">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/guides.html">Guides</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+          <li><a href="mailto:enquiries.talkace@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; 2026 SourcingLens. All rights reserved. · This tool provides estimates only and does not constitute legal or customs brokerage advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── Constants ───────────────────────────────────────────────────────────────
+const IEEPA_START = new Date("2025-02-04");
+const IEEPA_END   = new Date("2026-02-24");
+const INTEREST_RATE = 0.07; // 7% annual statutory interest
+const IEEPA_CODES_REGEX = /9903\.(01|08)\.\d{2}/;
+
+// CAPE submission CSV Stripe payment link — replace with your actual Stripe link
+const STRIPE_IEEPA_LINK = "https://buy.stripe.com/REPLACE_WITH_IEEPA_STRIPE_LINK";
+
+let analysisResults = null; // holds parsed entries
+
+// ─── File handling ────────────────────────────────────────────────────────────
+const uploadBox  = document.getElementById("upload-box");
+const fileInput  = document.getElementById("file-input");
+const fileList   = document.getElementById("file-list");
+const analyzeBtn = document.getElementById("analyze-btn");
+let selectedFiles = [];
+
+uploadBox.addEventListener("dragover", e => { e.preventDefault(); uploadBox.classList.add("drag-over"); });
+uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("drag-over"));
+uploadBox.addEventListener("drop", e => {
+  e.preventDefault(); uploadBox.classList.remove("drag-over");
+  addFiles([...e.dataTransfer.files]);
+});
+fileInput.addEventListener("change", () => addFiles([...fileInput.files]));
+
+function addFiles(newFiles) {
+  newFiles.forEach(f => {
+    if (!selectedFiles.find(x => x.name === f.name)) selectedFiles.push(f);
+  });
+  renderFileList();
+}
+
+function renderFileList() {
+  fileList.innerHTML = selectedFiles.map((f, i) => `
+    <div class="file-item">
+      <span>${f.name.endsWith(".pdf") ? "📄" : "📊"}</span>
+      <span class="fi-name">${f.name}</span>
+      <span class="fi-size">${(f.size / 1024).toFixed(0)} KB</span>
+      <button class="fi-remove" onclick="removeFile(${i})">✕</button>
+    </div>`).join("");
+  analyzeBtn.style.display = selectedFiles.length > 0 ? "block" : "none";
+}
+
+function removeFile(i) {
+  selectedFiles.splice(i, 1);
+  renderFileList();
+}
+
+// ─── ACE CSV parsing (client-side) ───────────────────────────────────────────
+function parseAceCsv(text) {
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (lines.length < 2) return [];
+
+  // Find header row (first row with recognisable column names)
+  const rawHeaders = lines[0].split(",").map(h => h.replace(/"/g, "").trim().toLowerCase());
+
+  const colIdx = {
+    entryNumber:      findCol(rawHeaders, ["entry number","entry no","entry_number","entry#"]),
+    entryDate:        findCol(rawHeaders, ["entry date","summary date","entry_date","import date"]),
+    liquidationDate:  findCol(rawHeaders, ["liquidation date","liq date","liq_date","liquidated date"]),
+    country:          findCol(rawHeaders, ["country of origin","coo","origin","country"]),
+    hts:              findCol(rawHeaders, ["hts number","tariff number","hts_number","hts","classification"]),
+    dutyAmount:       findCol(rawHeaders, ["ieepa duty","duty amount","duty paid","total duty","duty"]),
+    totalDuty:        findCol(rawHeaders, ["total duty paid","total duty","duty paid total"])
+  };
+
+  const entries = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = splitCsvRow(lines[i]);
+    if (cols.length < 3) continue;
+
+    const get = (key) => colIdx[key] != null ? (cols[colIdx[key]] || "").replace(/"/g, "").trim() : "";
+
+    const entryDate = parseDate(get("entryDate"));
+    if (!entryDate) continue;
+
+    const hts = get("hts");
+    const hasIeepaCode = IEEPA_CODES_REGEX.test(hts);
+    const inWindow = entryDate >= IEEPA_START && entryDate <= IEEPA_END;
+    const dutyStr = get("dutyAmount") || get("totalDuty");
+    const dutyAmount = parseMoney(dutyStr);
+
+    const liquidationDate = parseDate(get("liquidationDate"));
+    const today = new Date();
+    const daysSinceLiq = liquidationDate ? (today - liquidationDate) / 86400000 : null;
+    let phase = "ineligible";
+    if (inWindow && (hasIeepaCode || dutyAmount > 0)) {
+      if (!liquidationDate) phase = "phase1";
+      else if (daysSinceLiq <= 80) phase = "phase1";
+      else phase = "phase2";
+    }
+
+    // Interest estimate
+    const projectedRefund = new Date(today.getTime() + 90 * 86400000);
+    const days = (projectedRefund - entryDate) / 86400000;
+    const interest = phase !== "ineligible" ? Math.round(dutyAmount * INTEREST_RATE * days / 365) : 0;
+
+    entries.push({
+      entryNumber:     get("entryNumber") || `ENTRY-${i}`,
+      entryDate:       entryDate ? entryDate.toISOString().split("T")[0] : "",
+      liquidationDate: liquidationDate ? liquidationDate.toISOString().split("T")[0] : "Unliquidated",
+      country:         get("country") || "—",
+      htsCodes:        hts,
+      ieepaDutyAmount: dutyAmount,
+      estimatedInterest: interest,
+      estimatedTotal:  phase !== "ineligible" ? dutyAmount + interest : 0,
+      phase,
+      isEligible:      phase !== "ineligible"
+    });
+  }
+  return entries;
+}
+
+function findCol(headers, aliases) {
+  for (const alias of aliases) {
+    const idx = headers.findIndex(h => h.includes(alias));
+    if (idx !== -1) return idx;
+  }
+  return null;
+}
+
+function splitCsvRow(row) {
+  const cols = []; let cur = ""; let inQ = false;
+  for (let i = 0; i < row.length; i++) {
+    const c = row[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === "," && !inQ) { cols.push(cur); cur = ""; }
+    else cur += c;
+  }
+  cols.push(cur);
+  return cols;
+}
+
+function parseDate(str) {
+  if (!str) return null;
+  const d = new Date(str);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function parseMoney(str) {
+  if (!str) return 0;
+  return parseFloat(str.replace(/[$,\s]/g, "")) || 0;
+}
+
+// ─── Main analysis runner ─────────────────────────────────────────────────────
+async function runAnalysis() {
+  if (!selectedFiles.length) return;
+
+  const progressBar   = document.getElementById("progress-bar");
+  const progressFill  = document.getElementById("progress-fill");
+  const progressLabel = document.getElementById("progress-label");
+
+  progressBar.style.display = "block";
+  progressLabel.style.display = "block";
+  analyzeBtn.disabled = true;
+  analyzeBtn.textContent = "Analyzing…";
+
+  let allEntries = [];
+  const total = selectedFiles.length;
+
+  for (let i = 0; i < total; i++) {
+    const file = selectedFiles[i];
+    const pct = Math.round(((i) / total) * 85);
+    progressFill.style.width = pct + "%";
+    progressLabel.textContent = `Processing ${file.name} (${i + 1}/${total})…`;
+
+    try {
+      if (file.name.toLowerCase().endsWith(".csv")) {
+        const text = await file.text();
+        const entries = parseAceCsv(text);
+        allEntries = allEntries.concat(entries);
+      } else if (file.name.toLowerCase().endsWith(".pdf")) {
+        const base64 = await fileToBase64(file);
+        const resp = await fetch("/.netlify/functions/ieepa-parse", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fileBase64: base64, fileName: file.name })
+        });
+        const data = await resp.json();
+        if (data.entryNumber) {
+          allEntries.push({
+            entryNumber:       data.entryNumber || file.name,
+            entryDate:         data.entryDate || "",
+            liquidationDate:   data.liquidationDate || "Unliquidated",
+            country:           data.countryOfOrigin || "—",
+            htsCodes:          (data.ieepaCodesFound || []).join(", "),
+            ieepaDutyAmount:   data.ieepaDutyAmount || 0,
+            estimatedInterest: data.estimatedInterest || 0,
+            estimatedTotal:    data.estimatedTotal || 0,
+            phase:             data.phase || "ineligible",
+            isEligible:        data.isEligible || false
+          });
+        }
+      }
+    } catch (err) {
+      console.error("Error processing", file.name, err);
+    }
+  }
+
+  progressFill.style.width = "100%";
+  progressLabel.textContent = "Analysis complete!";
+  analyzeBtn.disabled = false;
+  analyzeBtn.textContent = "Analyze my entries →";
+
+  analysisResults = allEntries;
+  sessionStorage.setItem("ieepaResults", JSON.stringify(allEntries));
+  renderFreePreview(allEntries);
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// ─── Free preview renderer ────────────────────────────────────────────────────
+function renderFreePreview(entries) {
+  const eligible  = entries.filter(e => e.isEligible);
+  const phase1    = entries.filter(e => e.phase === "phase1");
+  const phase2    = entries.filter(e => e.phase === "phase2");
+  const totalDuty = eligible.reduce((s, e) => s + e.ieepaDutyAmount, 0);
+  const totalEst  = eligible.reduce((s, e) => s + e.estimatedTotal, 0);
+
+  document.getElementById("refund-estimate").textContent = formatMoney(totalEst);
+  document.getElementById("stat-total").textContent      = entries.length;
+  document.getElementById("stat-p1").textContent         = phase1.length;
+  document.getElementById("stat-p2").textContent         = phase2.length;
+  document.getElementById("stat-duty").textContent       = formatMoney(totalDuty);
+  document.getElementById("preview-title").textContent   = `${entries.length} entries analyzed`;
+  document.getElementById("preview-subtitle").textContent = `${eligible.length} eligible entries found · Phase 1: ${phase1.length} · Phase 2: ${phase2.length}`;
+
+  // Build blurred table rows (first 5 rows visible through blur)
+  const tbody = document.getElementById("preview-tbody");
+  tbody.innerHTML = entries.slice(0, 8).map(e => `
+    <tr>
+      <td>${e.entryNumber}</td>
+      <td>${e.entryDate}</td>
+      <td>${e.country}</td>
+      <td>${formatMoney(e.ieepaDutyAmount)}</td>
+      <td>${e.isEligible ? formatMoney(e.estimatedTotal) : "—"}</td>
+      <td>${phaseBadge(e.phase)}</td>
+    </tr>`).join("");
+
+  document.getElementById("free-preview").style.display = "block";
+  document.getElementById("free-preview").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function phaseBadge(phase) {
+  if (phase === "phase1") return '<span class="badge-p1">Phase 1</span>';
+  if (phase === "phase2") return '<span class="badge-p2">Phase 2</span>';
+  return '<span class="badge-no">Ineligible</span>';
+}
+
+function formatMoney(n) {
+  if (!n || n === 0) return "$0";
+  return "$" + Math.round(n).toLocaleString();
+}
+
+// ─── Payment ──────────────────────────────────────────────────────────────────
+function initiatePayment() {
+  if (analysisResults) {
+    sessionStorage.setItem("ieepaResults", JSON.stringify(analysisResults));
+  }
+  window.location.href = STRIPE_IEEPA_LINK + "?success_url=" + encodeURIComponent(window.location.origin + "/ieepa-result.html?paid=true");
+}
+</script>
+</body>
+</html>
