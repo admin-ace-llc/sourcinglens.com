@@ -1,23 +1,50 @@
 # SourcingLens
 
-> AI-powered landed cost calculator for US importers. Calculates total landed cost (FOB + freight + insurance + duties + fees) across sourcing countries (China, Vietnam, India, Mexico) in 30 seconds. Covers Section 301 tariffs, MFN duty rates, and HTS code lookup.
+> AI-powered import cost tools for US importers. Calculate true landed costs, look up HS codes, and identify IEEPA tariff refund eligibility — in minutes, not days.
 
-## Core tool
-- Free landed cost calculator: https://sourcinglens.com/#free
-- Starter plan ($29/report): https://sourcinglens.com/#starter
-- Pro plan ($89/5 SKUs): https://sourcinglens.com/#starter
+SourcingLens (sourcinglens.com) helps US importers make faster, more accurate sourcing decisions. The site provides two core tools: a landed cost calculator that compares sourcing countries side-by-side using live 2026 tariff rates, and an IEEPA Tariff Refund Analyzer that identifies which past shipments may qualify for a duty refund under the IEEPA tariff rollback.
 
-## Blog posts
-- China tariff calculator 2026: https://sourcinglens.com/blog/china-tariff-calculator-2026
-- Vietnam vs China landed cost comparison 2026: https://sourcinglens.com/blog/vietnam-vs-china-landed-cost-2026
-- How to find your HS code: https://sourcinglens.com/blog/how-to-find-hs-code
+## Tools
 
-## What SourcingLens covers
-- Landed cost formula: FOB + freight + insurance = CIF; duties applied to CIF value
-- Section 301 tariff tracking (US-China trade war duties, 7.5–145%)
-- HTS code inference from product descriptions (OpenAI-powered)
-- Multi-country comparison: China, Vietnam, India, Mexico
-- Procurement planning for US importers of physical goods
+- [Landed Cost Calculator](https://sourcinglens.com/): Free. Enter a product description, country of origin, and unit cost — get a multi-country landed cost comparison (China, Vietnam, Mexico, India, Bangladesh) with tariff, freight, and compliance cost breakdowns. Powered by Claude AI for HS code inference.
 
-## Optional extras
-- Blog: https://sourcinglens.com/blog
+- [IEEPA Tariff Refund Analyzer](https://sourcinglens.com/ieepa-refund): Upload CBP Form 7501 PDFs or ACE export CSVs. The tool parses entry dates, duty amounts, and liquidation status to flag eligible entries and estimate refund amounts including 6% interest. Free preview; $79 for full Refund Report with CAPE CSV and broker handoff PDF.
+
+## IEEPA Refund Guides
+
+- [IEEPA Tariff Refund 2026: Complete Guide](https://sourcinglens.com/blog/ieepa-tariff-refund-guide-2026): Which tariff types are refundable, eligibility requirements, Phase 1 vs Phase 2 windows, and the end-to-end claim process.
+
+- [How to File a CAPE Declaration: Step-by-Step](https://sourcinglens.com/blog/cape-declaration-step-by-step): Six concrete steps to file a CAPE declaration in ACE — entry number format, CSV structure, portal navigation, and common rejection reasons.
+
+- [How Much IEEPA Refund Am I Owed?](https://sourcinglens.com/blog/how-much-ieepa-refund-am-i-owed): Refund formula with worked examples for China electronics, Vietnam apparel, and Mexico industrial goods. Includes interest calculation and quick-estimate table by country.
+
+## Landed Cost & Tariff Guides
+
+- [China Tariff Calculator 2026](https://sourcinglens.com/blog/china-tariff-calculator-2026): How to calculate true landed cost from China after Section 301 duties, IEEPA tariffs, and de minimis elimination.
+
+- [Vietnam vs China Landed Cost 2026](https://sourcinglens.com/blog/vietnam-vs-china-landed-cost-2026): Side-by-side landed cost comparison — when the 20+ point tariff gap makes Vietnam cheaper despite higher FOB prices.
+
+- [How to Find Your HS Code](https://sourcinglens.com/blog/how-to-find-hs-code): USITC lookup method, misclassification traps, and when to request a CBP binding ruling.
+
+## Key Facts
+
+- Tariff data current as of 2026
+- IEEPA tariff window: entries dated 2025-02-04 through 2026-02-24
+- IEEPA Phase 1: unliquidated entries, or liquidated within 80 days of CAPE filing
+- IEEPA Phase 2: liquidated entries more than 80 days ago (requires protest filing)
+- Interest on IEEPA refunds accrues at 6% annually from entry date
+- Not legal or customs brokerage advice; outputs are for planning purposes only
+- Contact: enquiries.talkace@gmail.com
+
+## All pages
+
+- https://sourcinglens.com/
+- https://sourcinglens.com/ieepa-refund
+- https://sourcinglens.com/blog
+- https://sourcinglens.com/guides
+- https://sourcinglens.com/blog/ieepa-tariff-refund-guide-2026
+- https://sourcinglens.com/blog/cape-declaration-step-by-step
+- https://sourcinglens.com/blog/how-much-ieepa-refund-am-i-owed
+- https://sourcinglens.com/blog/china-tariff-calculator-2026
+- https://sourcinglens.com/blog/vietnam-vs-china-landed-cost-2026
+- https://sourcinglens.com/blog/how-to-find-hs-code
