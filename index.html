@@ -62,6 +62,109 @@
       letter-spacing: 0.01em;
     }
     .urgency-bar strong { color: #ffffff; }
+
+    /* ── Pathway section ── */
+    .pathway-section {
+      background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 55%, #0f2027 100%);
+      padding: 4rem 0 4.5rem;
+      text-align: center;
+    }
+    .pathway-eyebrow {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #818cf8; margin: 0 0 0.9rem;
+    }
+    .pathway-headline {
+      font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 800;
+      color: #fff; margin: 0 0 0.6rem; line-height: 1.15;
+    }
+    .pathway-sub {
+      color: #94a3b8; font-size: 1rem; margin: 0 auto 3rem;
+      max-width: 540px; line-height: 1.6;
+    }
+    .pathway-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; max-width: 860px; margin: 0 auto;
+    }
+    .pathway-card {
+      border-radius: 20px; padding: 2.25rem 2rem 2rem;
+      text-align: left; position: relative; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .pathway-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+    .pathway-card-blue {
+      background: linear-gradient(145deg, rgba(79,70,229,0.25) 0%, rgba(79,70,229,0.08) 100%);
+      border-color: rgba(99,102,241,0.35);
+    }
+    .pathway-card-green {
+      background: linear-gradient(145deg, rgba(5,150,105,0.25) 0%, rgba(5,150,105,0.08) 100%);
+      border-color: rgba(16,185,129,0.35);
+    }
+    .pathway-card-icon {
+      font-size: 2.2rem; margin-bottom: 1rem; display: block;
+    }
+    .pathway-card-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; margin: 0 0 0.5rem;
+    }
+    .pathway-card-blue .pathway-card-tag  { color: #a5b4fc; }
+    .pathway-card-green .pathway-card-tag { color: #6ee7b7; }
+    .pathway-card h2 {
+      font-size: 1.25rem; font-weight: 800; color: #fff;
+      margin: 0 0 0.75rem; line-height: 1.25;
+    }
+    .pathway-card p {
+      font-size: 0.875rem; color: #cbd5e1; line-height: 1.6; margin: 0 0 1.25rem;
+    }
+    .pathway-bullets {
+      list-style: none; padding: 0; margin: 0 0 1.75rem;
+    }
+    .pathway-bullets li {
+      font-size: 0.83rem; color: #e2e8f0; padding: 0.3rem 0;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+    }
+    .pathway-bullets li::before { content: "✓"; font-weight: 700; flex-shrink: 0; }
+    .pathway-card-blue  .pathway-bullets li::before { color: #a5b4fc; }
+    .pathway-card-green .pathway-bullets li::before { color: #6ee7b7; }
+    .pathway-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.9rem; font-weight: 700; padding: 0.7rem 1.4rem;
+      border-radius: 12px; border: none; cursor: pointer;
+      text-decoration: none; transition: filter 0.15s;
+      width: 100%; justify-content: center;
+    }
+    .pathway-cta:hover { filter: brightness(1.1); }
+    .pathway-cta-blue  { background: #4f46e5; color: #fff; }
+    .pathway-cta-green { background: #059669; color: #fff; }
+    .pathway-divider {
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 36px; height: 36px; background: #0f172a;
+      border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
+      color: #475569; font-size: 0.7rem; font-weight: 700; z-index: 2;
+      display: none; /* show only on desktop via grid positioning */
+    }
+
+    /* ── Free tool section (standalone below pathway) ── */
+    .free-tool-section {
+      padding: 3.5rem 0;
+      background: #f8fafc;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .free-tool-inner {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 3rem; align-items: start; max-width: 960px; margin: 0 auto;
+    }
+    .free-tool-left h2 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+    .free-tool-left p  { color: #6b7280; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.25rem; }
+    .free-tool-left .value-props { margin-bottom: 0; }
+
+    @media (max-width: 700px) {
+      .pathway-cards { grid-template-columns: 1fr; }
+      .free-tool-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
     .nav-cta {
       background: radial-gradient(circle at 0% 0%, #a5b4fc, #4f46e5);
       color: white !important;
@@ -255,11 +358,8 @@
   </script>
 </head>
 <body>
-  <div class="urgency-bar" style="background:linear-gradient(90deg,#064e3b,#065f46);">
-    🏦 <strong>Paid IEEPA tariffs in 2025?</strong> The Supreme Court ruled them unlawful — you may be owed a refund. <a href="/ieepa-refund.html" style="color:#6ee7b7;font-weight:700;text-decoration:underline;">Check your eligibility →</a>
-  </div>
   <div class="urgency-bar">
-    ⚡ <strong>Tariff rates updated June 2026.</strong> Section 301 duties on Chinese electronics still at 25–145%. Run your analysis before your next RFQ.
+    ⚡ <strong>Tariff rates updated June 2026.</strong> Section 301 duties on Chinese electronics still at 25–145%.
   </div>
   <header class="header">
     <div class="container header-inner">
@@ -271,52 +371,74 @@
         <p class="tagline">Know your true costs before the next RFQ.</p>
       </div>
       <nav class="nav-links">
-        <a class="nav-link" href="#free">Free Tool</a>
+        <a class="nav-link" href="#free">Landed Cost</a>
+        <a class="nav-link" href="/ieepa-refund.html" style="color:#6ee7b7;">IEEPA Refunds</a>
         <a class="nav-link" href="#starter">Pricing</a>
-        <a class="nav-link" href="#how-it-works">How it Works</a>
         <a class="nav-link" href="/blog.html">Blog</a>
-        <a class="nav-link" href="#faq">FAQ</a>
         <a class="nav-link nav-cta" href="#free">Try Free →</a>
       </nav>
     </div>
   </header>
   <main id="top">
-    <section class="hero-section">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <p class="section-eyebrow">AI-powered landed cost calculator</p>
-          <h1>See Your True Landed Cost in 30 Seconds—Before Your Next RFQ Burns Another Week</h1>
-          <p class="hero-sub">
-            Stop guessing on tariffs and shipping costs. Get exact landed cost breakdowns for China, Vietnam, and Mexico
-            in 30 seconds. Used by electronics importers navigating 2026 tariff changes.
-          </p>
-          <div class="value-props">
-            <div class="value-prop">
-              <span class="check">✓</span>
-              <span>Compare China vs Vietnam vs Mexico vs India in one click</span>
-            </div>
-            <div class="value-prop">
-              <span class="check">✓</span>
-              <span>See real 2026 tariff costs — not estimates, not guesses</span>
-            </div>
-            <div class="value-prop">
-              <span class="check">✓</span>
-              <span>Know if you're overpaying BEFORE you switch suppliers</span>
-            </div>
-            <div class="value-prop">
-              <span class="check">✓</span>
-              <span>AI-powered HS code lookup — describe your product in plain English</span>
-            </div>
+
+    <!-- ── Pathway chooser ───────────────────────────────────────── -->
+    <section class="pathway-section">
+      <div class="container">
+        <p class="pathway-eyebrow">SourcingLens — Import Intelligence Tools</p>
+        <h1 class="pathway-headline">What do you need help with today?</h1>
+        <p class="pathway-sub">Two tools for US importers. Pick your path — results in under 2 minutes.</p>
+        <div class="pathway-cards">
+
+          <!-- Card 1: Landed Cost -->
+          <div class="pathway-card pathway-card-blue" onclick="document.getElementById('free').scrollIntoView({behavior:'smooth'})">
+            <span class="pathway-card-icon">⚖️</span>
+            <p class="pathway-card-tag">Landed Cost & HS Code</p>
+            <h2>Calculate true import costs before your next RFQ</h2>
+            <p>Compare tariffs, freight, and compliance costs across 5 countries. AI finds your HS code from a plain-English product description.</p>
+            <ul class="pathway-bullets">
+              <li>AI-powered HS code lookup — no guessing</li>
+              <li>5-country side-by-side tariff comparison</li>
+              <li>2026 Section 301 rates built in</li>
+              <li>Free to try — no sign-up required</li>
+            </ul>
+            <a href="#free" class="pathway-cta pathway-cta-blue" onclick="event.stopPropagation()">Run free analysis →</a>
           </div>
-          <div class="usage-stat">
-            <strong>No sign-up required.</strong> Your free comparison is ready in 30 seconds.
+
+          <!-- Card 2: IEEPA Refund -->
+          <div class="pathway-card pathway-card-green" onclick="window.location.href='/ieepa-refund.html'">
+            <span class="pathway-card-icon">💰</span>
+            <p class="pathway-card-tag">IEEPA Tariff Refund</p>
+            <h2>Recover tariffs the Supreme Court ruled unlawful</h2>
+            <p>If you imported between Feb 2025 and Feb 2026, you likely overpaid. Upload your ACE export or 7501 PDFs — we calculate what you're owed.</p>
+            <ul class="pathway-bullets">
+              <li>$175B total refunds available to US importers</li>
+              <li>Upload ACE CSV or CBP Form 7501 PDFs</li>
+              <li>Get CAPE-ready CSV for CBP submission</li>
+              <li>Full eligibility report — $79 one-time</li>
+            </ul>
+            <a href="/ieepa-refund.html" class="pathway-cta pathway-cta-green" onclick="event.stopPropagation()">Check my refund →</a>
           </div>
-          <div class="hero-cta-row">
-            <a href="#free" class="btn btn-primary btn-large">Run My Free Comparison →</a>
-            <a href="#starter" class="btn btn-ghost">See Pricing</a>
-          </div>
+
         </div>
-        <div class="hero-card card" id="free">
+      </div>
+    </section>
+
+    <!-- ── Free landed cost tool ─────────────────────────────────── -->
+    <section class="free-tool-section" id="free-section">
+      <div class="container">
+        <div class="free-tool-inner">
+          <div class="free-tool-left">
+            <p class="section-eyebrow" style="margin-bottom:0.4rem;">Landed Cost Calculator</p>
+            <h2>See your true cost before you commit to a supplier</h2>
+            <p>Enter your product, country, and unit cost. Get an instant tariff + freight breakdown across China, Vietnam, Mexico, India, and the US.</p>
+            <div class="value-props">
+              <div class="value-prop"><span class="check">✓</span><span>Real 2026 tariff rates — not estimates</span></div>
+              <div class="value-prop"><span class="check">✓</span><span>AI HS code inference from product description</span></div>
+              <div class="value-prop"><span class="check">✓</span><span>5-country comparison in one run</span></div>
+              <div class="value-prop"><span class="check">✓</span><span>No sign-up. Free to try right now.</span></div>
+            </div>
+          </div>
+          <div class="hero-card card" id="free">
           <div class="card-header">
             <h2>Free Instant Comparison</h2>
             <p class="card-sub">No sign-up. Just two questions to start.</p>
@@ -388,8 +510,9 @@
             </button>
           </form>
         </div>
-      </div>
-    </section>
+        </div><!-- end free-tool-inner -->
+      </div><!-- end container -->
+    </section><!-- end free-tool-section -->
     <div class="trust-bar">
       <div class="container trust-bar-inner">
         <div class="trust-item"><span>⭐⭐⭐⭐⭐</span><span>4.8/5 from importers</span></div>
