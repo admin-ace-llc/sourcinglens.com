@@ -93,29 +93,6 @@
       color: #4b5563;
       font-weight: 500;
     }
-    .testimonials-section { padding: 2rem 0; }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    .testimonial-card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 1.2rem 1.3rem;
-      border: 1px solid rgba(226,232,240,0.9);
-      box-shadow: 0 6px 20px rgba(15,23,42,0.05);
-    }
-    .testimonial-stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 0.55rem; }
-    .testimonial-quote { font-size: 0.9rem; color: #1f2937; line-height: 1.55; margin: 0 0 1rem; }
-    .testimonial-attribution { display: flex; align-items: center; gap: 0.65rem; }
-    .avatar-circle {
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.8rem; color: white; flex-shrink: 0;
-    }
-    .testimonial-name { font-size: 0.82rem; font-weight: 600; color: #111827; margin: 0; }
-    .testimonial-role { font-size: 0.76rem; color: #6b7280; margin: 0; }
     .sample-section { padding: 2rem 0 0; }
     .sample-preview {
       border-radius: 16px;
@@ -245,7 +222,6 @@
     .blog-teaser-desc { font-size: 0.83rem; color: #6b7280; margin: 0 0 0.75rem; line-height: 1.5; }
     .blog-teaser-link { font-size: 0.82rem; color: #4f46e5; font-weight: 600; }
     @media (max-width: 900px) {
-      .testimonials-grid { grid-template-columns: minmax(0, 1fr); }
       .trust-bar-inner { gap: 1.2rem; }
       .sample-cta-box { padding: 1.2rem 1.4rem; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -466,20 +442,6 @@
             </div>
           </div>
           <aside class="results-side">
-            <div class="card subtle">
-              <div class="testimonial-stars">★★★★★</div>
-              <p class="side-text">
-                <em>"Saved us $47K/year by catching hidden Section 301 tariffs on our electronics line.
-                The $19 Starter analysis paid for itself in the first shipment."</em>
-              </p>
-              <div class="testimonial-attribution" style="margin-top: 0.75rem;">
-                <div class="avatar-circle" style="background: linear-gradient(135deg, #a5b4fc, #4f46e5);">SC</div>
-                <div>
-                  <p class="testimonial-name">Sarah Chen</p>
-                  <p class="testimonial-role">Procurement Director, TechCorp</p>
-                </div>
-              </div>
-            </div>
             <div class="card subtle" style="margin-top: 0.9rem;">
               <h3 style="margin: 0 0 0.5rem; font-size: 0.95rem;">Next steps</h3>
               <ol class="side-list">
@@ -493,56 +455,6 @@
         </div>
       </div>
     </section>
-    <section class="testimonials-section">
-      <div class="container">
-        <p class="section-eyebrow" style="text-align:center; margin-bottom: 0.8rem;">What importers say</p>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-quote">
-              "We were about to renew our China contracts. The Starter analysis showed Vietnam would save us
-              $34K annually after tariffs and shipping. Worth every penny of the $19."
-            </p>
-            <div class="testimonial-attribution">
-              <div class="avatar-circle" style="background: linear-gradient(135deg, #6ee7b7, #059669);">MR</div>
-              <div>
-                <p class="testimonial-name">Marcus Rodriguez</p>
-                <p class="testimonial-role">Supply Chain Manager, consumer goods</p>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★★</div>
-            <p class="testimonial-quote">
-              "I'm a freight forwarder and I use this to quickly model scenarios for clients.
-              Pro Monthly pays for itself in the first client meeting. The HS suggestions are surprisingly accurate."
-            </p>
-            <div class="testimonial-attribution">
-              <div class="avatar-circle" style="background: linear-gradient(135deg, #fca5a5, #dc2626);">JL</div>
-              <div>
-                <p class="testimonial-name">Jennifer Liu</p>
-                <p class="testimonial-role">Freight forwarder, 12 years</p>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-stars">★★★★☆</div>
-            <p class="testimonial-quote">
-              "The free tool gave me enough to justify the deeper analysis. The 5-country comparison
-              in Starter made our nearshoring decision a lot clearer. I'd like to see India data improved."
-            </p>
-            <div class="testimonial-attribution">
-              <div class="avatar-circle" style="background: linear-gradient(135deg, #c4b5fd, #7c3aed);">AP</div>
-              <div>
-                <p class="testimonial-name">Anika Patel</p>
-                <p class="testimonial-role">E-commerce founder, Shopify</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Blog teaser section -->
     <section class="blog-teaser-section">
       <div class="container">
