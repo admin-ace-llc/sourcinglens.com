@@ -1,36 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages -->
   <url>
     <loc>https://sourcinglens.com/</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://sourcinglens.com/ieepa-refund</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://sourcinglens.com/blog</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sourcinglens.com/guides</loc>
-    <lastmod>2025-12-08</lastmod>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- IEEPA Refund blog posts -->
+  <url>
+    <loc>https://sourcinglens.com/blog/ieepa-tariff-refund-guide-2026</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sourcinglens.com/blog/cape-declaration-step-by-step</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sourcinglens.com/blog/how-much-ieepa-refund-am-i-owed</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Existing blog posts -->
+  <url>
+    <loc>https://sourcinglens.com/blog/china-tariff-calculator-2026</loc>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://sourcinglens.com/blog/vietnam-vs-china-landed-cost-2026</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sourcinglens.com/blog/how-to-find-hs-code</loc>
+    <lastmod>2026-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Legal / utility -->
+  <url>
     <loc>https://sourcinglens.com/privacy.html</loc>
-    <lastmod>2025-12-08</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://sourcinglens.com/terms.html</loc>
-    <lastmod>2025-12-08</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://sourcinglens.com/disclaimer.html</loc>
-    <lastmod>2025-12-08</lastmod>
-    <priority>0.5</priority>
+    <lastmod>2026-01-01</lastmod>
+    <priority>0.3</priority>
   </url>
+
 </urlset>
