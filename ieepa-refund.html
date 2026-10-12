@@ -163,6 +163,84 @@
       .pricing-grid { grid-template-columns: 1fr; }
     }
   </style>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SourcingLens IEEPA Tariff Refund Analyzer",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://sourcinglens.com/ieepa-refund",
+  "description": "Find out how much IEEPA tariff refund you're owed. Upload your ACE entry history or CBP Form 7501s — get a full eligibility report and CAPE-ready CSV in minutes.",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Free Preview",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    {
+      "@type": "Offer",
+      "name": "Full Refund Report",
+      "price": "79",
+      "priceCurrency": "USD"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "SourcingLens",
+    "url": "https://sourcinglens.com"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What documents do I need to upload?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The easiest source is your ACE Secure Data Portal entry history export (a CSV containing all your entry summaries). Alternatively, upload your CBP Form 7501 PDFs — one per shipment, up to 20 at a time. Your customs broker can also provide either of these."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the CAPE CSV and how do I use it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CAPE (Consolidated Administration and Processing of Entries) is CBP's portal for submitting IEEPA refund claims. You upload a CSV of your eligible entry numbers into the CAPE tab in ACE. Our tool generates this CSV pre-formatted to CBP specifications. You or your licensed customs broker uploads it to ACE to initiate your refund."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between Phase 1 and Phase 2?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Phase 1 covers entries that are unliquidated or liquidated within 80 days of your CAPE submission date. Phase 2 covers older liquidated entries and is expected to open later. We flag which of your entries fall into each phase so you know what to prioritize."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you file the CAPE Declaration on my behalf?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — only the Importer of Record (that's you) or your licensed customs broker can submit the CAPE Declaration to CBP. We prepare all the documents; you or your broker submits them. This keeps us in the document preparation lane and you in full control of your filing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my documents stored or shared?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Your documents are processed in your browser session and via our secure serverless function — never stored on our servers. The analysis results exist only in your browser session until you download them."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
